@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Terminal, Boxes, FolderGit2, Briefcase, GraduationCap, Send } from "lucide-react";
+import { Terminal, Boxes, FolderGit2, Briefcase, GraduationCap, Heart, Send } from "lucide-react";
 
 const items = [
   { id: "hero", label: "init", icon: Terminal },
@@ -8,6 +8,7 @@ const items = [
   { id: "projects", label: "work", icon: FolderGit2 },
   { id: "experience", label: "exp", icon: Briefcase },
   { id: "education", label: "edu", icon: GraduationCap },
+  { id: "volunteer", label: "vol", icon: Heart },
   { id: "contact", label: "contact", icon: Send },
 ];
 
@@ -17,11 +18,11 @@ export function NavDock() {
   useEffect(() => {
     const obs = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
+        for (const e of entries) {
           if (e.isIntersecting) setActive(e.target.id);
-        });
+        }
       },
-      { threshold: 0.5 }
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
     );
     items.forEach((i) => {
       const el = document.getElementById(i.id);

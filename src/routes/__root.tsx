@@ -80,7 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Anandhakrishnan Nair — Full Stack Developer Portfolio" },
       { name: "description", content: "Full Stack Developer building supply chain and CRM systems. Portfolio with measurable production impact." },
       { property: "og:title", content: "Anandhakrishnan Nair — Full Stack Developer" },
-      { property: "og:description", content: "Building scalable systems that ship measurable impact." },
+      { property: "og:description", content: "Full Stack Developer building production supply chain and CRM systems." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

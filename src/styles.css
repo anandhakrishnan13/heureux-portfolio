@@ -47,6 +47,14 @@
   --shadow-glow-strong: 0 0 32px 0 color-mix(in oklab, var(--cyan) 18%, transparent),
     0 0 1px 0 color-mix(in oklab, var(--cyan) 40%, transparent) inset;
   --shadow-glow-green: 0 0 20px 0 color-mix(in oklab, var(--term-green) 12%, transparent);
+  --shadow-glow-cta: 0 0 28px -6px var(--cyan);
+  --shadow-dot: 0 0 8px var(--term-green);
+  --shadow-glow-active: 0 0 16px -2px var(--cyan);
+  --shadow-nav-cta: 0 0 20px -4px var(--cyan);
+
+  --text-meta: 10px;
+  --text-tag: 9px;
+  --text-terminal: 13px;
 
   --gradient-obsidian: radial-gradient(
     1200px 600px at 50% -10%,
@@ -198,5 +206,11 @@
     background: linear-gradient(180deg, transparent, color-mix(in oklab, var(--cyan) 8%, transparent), transparent);
     animation: scan 4s linear infinite;
     pointer-events: none;
+  }
+}
+
+@media (width >= 48rem) {
+  .grid-cols-hero {
+    grid-template-columns: 1.4fr 1fr;
   }
 }

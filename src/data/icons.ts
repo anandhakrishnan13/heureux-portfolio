@@ -1,0 +1,43 @@
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiRedux,
+  SiShadcnui,
+  SiNodedotjs,
+  SiExpress,
+  SiBun,
+  SiPostgresql,
+  SiMongodb,
+  SiRedis,
+  SiMysql,
+  SiDocker,
+  SiSupabase,
+  SiGit,
+  SiLinux,
+  SiGooglegemini,
+} from "react-icons/si";
+
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  react: SiReact,
+  nextjs: SiNextdotjs,
+  typescript: SiTypescript,
+  tailwindcss: SiTailwindcss,
+  redux: SiRedux,
+  shadcn: SiShadcnui,
+  nodejs: SiNodedotjs,
+  express: SiExpress,
+  bun: SiBun,
+  postgresql: SiPostgresql,
+  mongodb: SiMongodb,
+  redis: SiRedis,
+  mysql: SiMysql,
+  docker: SiDocker,
+  supabase: SiSupabase,
+  git: SiGit,
+  linux: SiLinux,
+  googlegemini: SiGooglegemini,
+};
+
+export default iconMap;

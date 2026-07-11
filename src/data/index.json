@@ -1,0 +1,269 @@
+{
+  "meta": {
+    "title": "Anandhakrishnan Nair — Full Stack Developer",
+    "description": "Full Stack Developer building supply chain and CRM systems. Production experience with measurable impact."
+  },
+  "hero": {
+    "sectionLabel": "init.session",
+    "command": "whoami --sudo",
+    "name": "Anandhakrishnan Nair",
+    "role": "Full Stack Developer",
+    "bio": "I build supply chain and CRM systems. Shipped an ERP used across 7 facilities handling over a thousand orders a day, with live inventory tracking and auto-replenishment for 2,000+ products. Pursuing my MCA at Manipal and volunteering on the side.",
+    "typewriter": [
+      "build.supply_chain_systems()",
+      "ship.production_features()",
+      "reduce.order_latency()",
+      "manage.multi_facility_ops()"
+    ],
+    "profileFocus": [
+      "supply-chain",
+      "CRM"
+    ],
+    "experience": "~1 yr production",
+    "shipped": "9 production systems",
+    "target": "senior-track growth",
+    "gitLog": {
+      "a4f12c1": "feat: automated supply chain replenishment (2K+ SKUs)",
+      "9b22e80": "feat: supply chain workflow automation",
+      "3e1d4aa": "feat: achieved 100% inventory accuracy via QR tracking"
+    },
+    "status": "online building production systems",
+    "cta": "View My Work",
+    "photo": "/me.png",
+    "photoAlt": "Anandhakrishnan Nair",
+    "linkedinUrl": "https://linkedin.com/in/anandhakrishnan13",
+    "linkedinLabel": "LinkedIn"
+  },
+  "sections": {
+    "stack": {
+      "sectionLabel": "stack.manifest",
+      "heading": "What I work with.",
+      "highlight": "work with",
+      "subtitle": "Tools I actually use in production across MERN and Next.js apps.",
+      "stats": {
+        "production exp": null,
+        "SKUs managed": "2,000+",
+        "raw materials per SKU": "20+",
+        "inventory accuracy": "100%"
+      }
+    },
+    "projects": {
+      "sectionLabel": "projects.log",
+      "heading": "Personal works.",
+      "highlight": "works",
+      "githubUrl": "https://github.com/anandhakrishnan13",
+      "allReposLabel": "all repos",
+      "sourceLabel": "source"
+    },
+    "experience": {
+      "sectionLabel": "experience.sh",
+      "heading": "Production experience.",
+      "highlight": "experience"
+    },
+    "volunteer": {
+      "sectionLabel": "volunteer.log",
+      "heading": "Community.",
+      "highlight": "Community"
+    },
+    "education": {
+      "sectionLabel": "education.txt",
+      "heading": "Academic background.",
+      "highlight": "background"
+    },
+    "contact": {
+      "sectionLabel": "connect.handshake",
+      "heading": "Start a conversation.",
+      "highlight": "Start a conversation",
+      "subtitle": "Looking for full-time work and interesting projects. Let's talk.",
+      "ssh": "ssh anand@portfolio.dev",
+      "features": [
+        "response time less than 24h",
+        "timezone flexible (IST)",
+        "open to remote"
+      ],
+      "email": "anandhakrishnannair13@gmail.com",
+      "linkedinUrl": "https://linkedin.com/in/anandhakrishnan13",
+      "linkedinLabel": "LinkedIn",
+      "githubUrl": "https://github.com/anandhakrishnan13",
+      "githubLabel": "GitHub"
+    }
+  },
+  "footer": "anand-portfolio v1.0",
+  "stack": {
+    "Frontend": {
+      "React": "react",
+      "Next.js": "nextjs",
+      "TypeScript": "typescript",
+      "Tailwind CSS": "tailwindcss",
+      "Redux Toolkit": "redux",
+      "Shadcn": "shadcn"
+    },
+    "Backend": {
+      "Node.js": "nodejs",
+      "Express.js": "express",
+      "Bun": "bun",
+      "PostgreSQL": "postgresql",
+      "MongoDB": "mongodb",
+      "Redis": "redis",
+      "MySQL": "mysql",
+      "BullMQ": null,
+      "WebSockets": null
+    },
+    "Infrastructure": {
+      "Docker": "docker",
+      "Supabase": "supabase",
+      "Git": "git",
+      "Linux": "linux",
+      "Google Gemini": "googlegemini",
+      "OAuth": null,
+      "REST APIs": null
+    }
+  },
+  "projects": [
+    {
+      "id": "001",
+      "name": "Smart Bookmark",
+      "role": "Solo Developer",
+      "action": "A bookmark manager that syncs across your devices. Uses Google Gemini so you can search your bookmarks with plain English queries. Jina AI scrapes pages into clean text before indexing. Has collections, favourites, and a trash bin with 30-day recovery.",
+      "impact": "AI-powered semantic search with Google Gemini integration",
+      "metric": "AI",
+      "metricLabel": "Integrated",
+      "stack": [
+        "Next.js",
+        "Supabase",
+        "Gemini API",
+        "Jina AI",
+        "TypeScript"
+      ],
+      "href": "https://github.com/anandhakrishnan13"
+    },
+    {
+      "id": "002",
+      "name": "Academia",
+      "role": "Full Stack Developer",
+      "action": "A student management system with separate portals for admins, teachers, and students. Handles attendance, timetables, and results through a Flutter frontend backed by Node.js.",
+      "impact": "Serves admins, teachers, and students through role-based portals",
+      "metric": "3-tier",
+      "metricLabel": "RBAC",
+      "stack": [
+        "Flutter",
+        "Node.js",
+        "Express.js",
+        "SQLite",
+        "REST APIs"
+      ],
+      "href": "https://github.com/anandhakrishnan13/academia"
+    },
+    {
+      "id": "003",
+      "name": "E-Commerce Admin Panel",
+      "role": "Full Stack Developer",
+      "action": "Built a full-featured admin dashboard for product, order, and inventory management.",
+      "impact": "Reduced manual operations by 60% with centralized management",
+      "metric": "-60%",
+      "metricLabel": "ops",
+      "stack": [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Tailwind CSS"
+      ],
+      "href": "https://github.com/anandhakrishnan13",
+      "archived": true
+    },
+    {
+      "id": "004",
+      "name": "Job Portal",
+      "role": "Full Stack Developer",
+      "action": "Developed a dual-role job listing and application platform with smart filtering.",
+      "impact": "Connected 200+ employers with candidates through smart filtering",
+      "metric": "200+",
+      "metricLabel": "employers",
+      "stack": [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "REST APIs"
+      ],
+      "href": "https://github.com/anandhakrishnan13/jobportal",
+      "archived": true
+    }
+  ],
+  "experience": {
+    "company": "Flo Sleep Solutions Pvt Ltd",
+    "role": "Full Stack Developer",
+    "location": "Andheri, Mumbai",
+    "period": "August 2025 - Present",
+    "projects": {
+      "Flo-Bridge CRM": {
+        "stack": [
+          "MongoDB",
+          "Express.js",
+          "React.js",
+          "Node.js",
+          "Shadcn"
+        ],
+        "highlights": [
+          "Built a MERN application for supply chain operations. Used daily across 7 facilities by teams handling inventory, planning, and logistics.",
+          "Built an inventory management system achieving 100% accuracy through QR-based inward entry. Tracks raw materials at unit level, logging consumption automatically. For example, scanning a 150m fabric roll and logging the remaining 100m after cutting 50m eliminates stockouts and manual reconciliation.",
+          "Developed a production planning module handling 3-4 daily batches of 250-400 orders per batch across 4 facilities. Synced from Unicommerce in real time, organized by marketplace, escalation level, and Shopify channel, each sorted by fulfilment TAT to prioritise urgent orders.",
+          "Automated MRP label generation and raw material lists by batch grouping 200-400+ orders across 4 production facilities, replacing manual planning and cutting preparation time for production runs."
+        ]
+      },
+      "Flo-Bridge 2.0": {
+        "stack": [
+          "Next.js",
+          "Express.js",
+          "BullMQ",
+          "MongoDB",
+          "Tailwind CSS"
+        ],
+        "highlights": [
+          "Moved to microservices with Next.js, bringing Planning, QC, Picklist, and Dispatch into one data model. Cut MongoDB load and cleaned up duplicate logic across 7 facilities.",
+          "Built an automated QC-to-Picklist pipeline with multi-stage quality checks tracking raw material consumption per order. Auto-marks orders as packed in Unicommerce, then scans MRP labels to batch and mark them Ready-to-Ship, eliminating manual RTS and factory-level inaccuracies.",
+          "Built BullMQ workers for automated daily order ingestion from Unicommerce, order escalation triggers, consumption scanning to track raw material usage per order, and automatic order swapping to matching SKU or measurement on cancellation.",
+          "Developed a Replenishment module syncing 2,000+ SKUs across 3 third-party logistics facilities via a daily Unicommerce API worker. Teams can set buffer levels, minimum order quantities, and vendor preferences per product to plan their restocking.",
+          "Built an analytics dashboard with 90-day SKU health graphs across 6 stock levels and a facility heatmap tracking day-to-day inventory trends across 3 third-party logistics facilities.",
+          "Auto-suggests reorders when stock hits 66% of the buffer level and the quantity meets the minimum order. Tells you whether a product is slow because nobody wants it or because you have too much from a vendor."
+        ]
+      }
+    }
+  },
+  "education": [
+    {
+      "school": "Manipal University Jaipur",
+      "degree": "Master of Computer Applications (MCA)",
+      "score": "SGPA: 8.70",
+      "period": "2024 - Present"
+    },
+    {
+      "school": "Keraleeya Samajam's Model College, Dombivli",
+      "degree": "Bachelor of Science in Information Technology",
+      "score": "Percentage: 80.2%",
+      "period": "2021 - 2024"
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "Melam 2.0 - Nair Welfare Association",
+      "role": "Material Coordinator & Score Management Volunteer",
+      "period": "March 2026",
+      "highlights": [
+        "Managed material requirements and procurement for a 16-team tournament, ensuring all equipment and supplies arrived on schedule.",
+        "Maintained score cards and managed real-time score display on CricHeroes throughout the tournament."
+      ]
+    },
+    {
+      "organization": "Yuva Jagraan 2.0 - Samanwaya Charitable Association",
+      "role": "Time Coordinator & Crowd Management Volunteer",
+      "period": "January 2026",
+      "highlights": [
+        "Managed event timelines and volunteer coordination for Career Walkthrough and Mental Wellness sessions with 200+ students across concurrent tracks.",
+        "Oversaw crowd flow, enforced safety protocols, and verified venue and speaker readiness across all event stages.",
+        "Served as central point of contact for real-time issue resolution during event operations."
+      ]
+    }
+  ]
+}

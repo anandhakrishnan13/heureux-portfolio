@@ -5,8 +5,8 @@ import { Terminal, Boxes, FolderGit2, Briefcase, GraduationCap, Heart, Send } fr
 const items = [
   { id: "hero", label: "init", icon: Terminal },
   { id: "stack", label: "stack", icon: Boxes },
-  { id: "projects", label: "work", icon: FolderGit2 },
   { id: "experience", label: "exp", icon: Briefcase },
+  { id: "projects", label: "proj", icon: FolderGit2 },
   { id: "education", label: "edu", icon: GraduationCap },
   { id: "volunteer", label: "vol", icon: Heart },
   { id: "contact", label: "contact", icon: Send },
@@ -38,8 +38,8 @@ export function NavDock() {
   return (
     <nav className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2">
       <div className="glass-dock flex items-center gap-1 rounded-lg p-1.5">
-        <div className="flex items-center gap-2 px-3 py-1.5 font-meta text-[10px] text-muted-foreground border-r border-border/60">
-          <span className="size-1.5 rounded-full bg-term-green shadow-[0_0_8px_var(--term-green)]" />
+        <div className="flex items-center gap-2 px-3 py-1.5 font-meta text-meta text-muted-foreground border-r border-border/60">
+          <span className="size-1.5 rounded-full bg-term-green shadow-dot" />
           <span>anand@portfolio</span>
         </div>
         {items.map((it, i) => {
@@ -55,11 +55,11 @@ export function NavDock() {
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              <span className="font-meta text-[10px] opacity-50">0{i + 1}</span>
+              <span className="font-meta text-meta opacity-50">0{i + 1}</span>
               <Icon className="size-3.5" strokeWidth={2} />
               <span className="hidden sm:inline">{it.label}</span>
               {isActive && (
-                <span className="absolute inset-0 -z-10 rounded-md bg-cyan/10 ring-1 ring-cyan/30 shadow-[0_0_16px_-2px_var(--cyan)]" />
+                <span className="absolute inset-0 -z-10 rounded-md bg-cyan/10 ring-1 ring-cyan/30 shadow-glow-active" />
               )}
             </button>
           );
@@ -71,7 +71,7 @@ export function NavDock() {
             e.preventDefault();
             go("contact");
           }}
-          className="ml-1 hidden md:inline-flex items-center gap-2 rounded-md bg-cyan px-3 py-2 font-mono-display text-xs font-medium text-cyan-foreground shadow-[0_0_20px_-4px_var(--cyan)] hover:brightness-110 transition"
+          className="ml-1 hidden md:inline-flex items-center gap-2 rounded-md bg-cyan px-3 py-2 font-mono-display text-xs font-medium text-cyan-foreground shadow-nav-cta hover:brightness-110 transition"
         >
           hire_me<span className="opacity-60">()</span>
         </Link>

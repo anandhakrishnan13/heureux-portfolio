@@ -68,13 +68,10 @@ function SectionLabel({ index, name }: { index: string; name: string }) {
 function SectionHeading({ section, className }: { section: Section; className?: string }) {
   const parts = section.heading.split(section.highlight);
   return (
-    <h2
-      className={
-        className ??
-        "font-mono-display text-4xl font-bold tracking-tight md:text-5xl"
-      }
-    >
-      {parts[0]}<span className="text-cyan">{section.highlight}</span>{parts[1]}
+    <h2 className={className ?? "font-mono-display text-4xl font-bold tracking-tight md:text-5xl"}>
+      {parts[0]}
+      <span className="text-cyan">{section.highlight}</span>
+      {parts[1]}
     </h2>
   );
 }
@@ -123,30 +120,36 @@ function Hero() {
           <SectionLabel index="01" name={hero.sectionLabel} />
         </motion.div>
 
-        <div className="grid grid-cols-hero md:items-end">
+        <div className="grid grid-cols-hero md:items-start">
           <div>
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.1 }}
-              className="font-mono-display text-sm text-muted-foreground"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4, duration: 0.7 }}
+              className="card-glow mb-6 inline-block overflow-hidden rounded-full p-1"
             >
-              <span className="text-term-green">~/portfolio</span>
-              <span className="text-cyan"> $ </span>
-              <span>{hero.command}</span>
+              <img
+                src={hero.photo}
+                alt={hero.photoAlt}
+                className="size-48 rounded-full object-cover md:size-56"
+              />
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.7 }}
-              className="mt-6 font-mono-display text-4xl font-bold leading-tight tracking-tight md:text-6xl"
+              className="mt-6 flex min-h-[1.5em] items-center gap-2 font-mono-display text-4xl font-bold leading-tight tracking-tight md:text-6xl"
             >
-              {hero.name}
-              <span className="mt-2 block text-lg font-normal text-muted-foreground md:text-xl">
-                {hero.role}
-              </span>
+              <span className="text-muted-foreground text-2xl md:text-4xl">$ </span>
+              <Typewriter
+                className="text-foreground"
+                words={[hero.name]}
+              />
             </motion.h1>
+            <p className="mt-2 font-mono-display text-lg font-normal text-muted-foreground md:text-xl">
+              {hero.role}
+            </p>
 
             <motion.p
               initial={{ opacity: 0 }}
@@ -156,25 +159,58 @@ function Hero() {
             >
               {hero.bio}
             </motion.p>
+          </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-              className="mt-8 flex items-center gap-3 font-mono-display text-sm"
-            >
-              <span className="text-muted-foreground">$ run</span>
-              <Typewriter
-                className="text-foreground"
-                words={hero.typewriter}
-              />
-            </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4, duration: 0.7 }}
+            className="flex flex-col gap-6"
+          >
+            <div className="card-glow scanline overflow-hidden">
+              <div className="flex items-center justify-between border-b border-border/60 bg-surface-2/60 px-4 py-2.5">
+                <div className="flex items-center gap-1.5">
+                  <span className="size-2.5 rounded-full bg-destructive/70" />
+                  <span className="size-2.5 rounded-full bg-term-amber/80" />
+                  <span className="size-2.5 rounded-full bg-term-green/80" />
+                </div>
+                <ChevronRight className="size-3 text-muted-foreground" />
+              </div>
+              <div className="space-y-2.5 p-5 font-mono-display text-terminal leading-relaxed">
+                <Line p="$" cmd="cat profile.json" />
+                <pre className="rounded-md bg-background/60 p-3 text-xs text-foreground/90">
+                  {JSON.stringify(
+                    {
+                      focus: hero.profileFocus,
+                      experience: hero.experience,
+                      shipped: hero.shipped,
+                      target: hero.target,
+                    },
+                    null,
+                    2,
+                  )}
+                </pre>
+                <Line p="$" cmd="git log --oneline -3" />
+                <div className="space-y-1 pl-2 text-muted-foreground">
+                  {Object.entries(hero.gitLog).map(([hash, msg]) => (
+                    <div key={hash}>
+                      <span className="text-term-amber">{hash}</span> {msg}
+                    </div>
+                  ))}
+                </div>
+                <Line p="$" cmd="status" />
+                <div className="flex items-center gap-2 pl-2 text-term-green">
+                  <span className="size-1.5 rounded-full bg-term-green shadow-dot" />
+                  {hero.status}
+                </div>
+              </div>
+            </div>
 
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9 }}
-              className="mt-8 flex flex-wrap gap-3"
+              className="mt-4 flex flex-wrap gap-3"
             >
               <a
                 href="#projects"
@@ -197,61 +233,6 @@ function Hero() {
                 {hero.linkedinLabel}
               </a>
             </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.7 }}
-            className="flex flex-col gap-6"
-          >
-            <div className="card-glow mx-auto overflow-hidden rounded-full p-1">
-              <img
-                src={hero.photo}
-                alt={hero.photoAlt}
-                className="size-48 rounded-full object-cover md:size-56"
-              />
-            </div>
-
-            <div className="card-glow scanline overflow-hidden">
-              <div className="flex items-center justify-between border-b border-border/60 bg-surface-2/60 px-4 py-2.5">
-                <div className="flex items-center gap-1.5">
-                  <span className="size-2.5 rounded-full bg-destructive/70" />
-                  <span className="size-2.5 rounded-full bg-term-amber/80" />
-                  <span className="size-2.5 rounded-full bg-term-green/80" />
-                </div>
-                <span className="font-meta text-meta text-muted-foreground">~/anand zsh</span>
-                <ChevronRight className="size-3 text-muted-foreground" />
-              </div>
-              <div className="space-y-2.5 p-5 font-mono-display text-terminal leading-relaxed">
-                <Line p="$" cmd="cat profile.json" />
-                <pre className="rounded-md bg-background/60 p-3 text-xs text-foreground/90">
-                  {JSON.stringify(
-                    {
-                      focus: hero.profileFocus,
-                      experience: hero.experience,
-                      shipped: hero.shipped,
-                      target: hero.target,
-                    },
-                    null,
-                    2
-                  )}
-                </pre>
-                <Line p="$" cmd="git log --oneline -3" />
-                <div className="space-y-1 pl-2 text-muted-foreground">
-                  {Object.entries(hero.gitLog).map(([hash, msg]) => (
-                    <div key={hash}>
-                      <span className="text-term-amber">{hash}</span> {msg}
-                    </div>
-                  ))}
-                </div>
-                <Line p="$" cmd="status" />
-                <div className="flex items-center gap-2 pl-2 text-term-green">
-                  <span className="size-1.5 rounded-full bg-term-green shadow-dot" />
-                  {hero.status}
-                </div>
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>
@@ -269,10 +250,7 @@ function Stack() {
     Infrastructure: Cloud,
   } as const;
   return (
-    <section
-      id="stack"
-      className="snap-section relative justify-center bg-surface px-6"
-    >
+    <section id="stack" className="snap-section relative justify-center bg-surface px-6">
       <div className="mx-auto w-full max-w-6xl">
         <SectionLabel index="02" name={section.sectionLabel} />
         <SectionHeading section={section} />
@@ -332,7 +310,9 @@ function Stack() {
               <div className="font-mono-display text-2xl font-bold text-cyan">
                 {key === null ? getExperienceLabel() : key}
               </div>
-              <div className="mt-1 text-justify font-meta text-meta text-muted-foreground">{label}</div>
+              <div className="mt-1 text-justify font-meta text-meta text-muted-foreground">
+                {label}
+              </div>
             </div>
           ))}
         </div>
@@ -436,10 +416,7 @@ function Projects() {
 function Experience() {
   const section = data.sections.experience;
   return (
-    <section
-      id="experience"
-      className="snap-section relative justify-center bg-surface px-6"
-    >
+    <section id="experience" className="snap-section relative justify-center bg-surface px-6">
       <div className="mx-auto w-full max-w-6xl py-10">
         <SectionLabel index="03" name={section.sectionLabel} />
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
@@ -451,7 +428,9 @@ function Experience() {
             <div>
               <div className="flex items-center gap-2">
                 <img src="/flo.svg" alt="Flo Sleep Solutions" className="h-5 w-auto" />
-                <h3 className="font-mono-display text-xl font-semibold">{data.experience.company}</h3>
+                <h3 className="font-mono-display text-xl font-semibold">
+                  {data.experience.company}
+                </h3>
               </div>
               <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1">
@@ -539,12 +518,12 @@ function Volunteer() {
                   <ul className="mt-4 space-y-2">
                     {v.highlights.map((h, j) => (
                       <li
-                          key={j}
-                          className="flex gap-2 text-justify text-xs text-muted-foreground leading-relaxed"
-                        >
-                          <span className="mt-1 size-1 shrink-0 rounded-full bg-rose-500/60" />
-                          {h}
-                        </li>
+                        key={j}
+                        className="flex gap-2 text-justify text-xs text-muted-foreground leading-relaxed"
+                      >
+                        <span className="mt-1 size-1 shrink-0 rounded-full bg-rose-500/60" />
+                        {h}
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -610,10 +589,7 @@ function Education() {
 function Contact() {
   const section = data.sections.contact;
   return (
-    <section
-      id="contact"
-      className="snap-section relative justify-center bg-surface px-6"
-    >
+    <section id="contact" className="snap-section relative justify-center bg-surface px-6">
       <div className="mx-auto w-full max-w-4xl py-10 text-center">
         <SectionLabel index="07" name={section.sectionLabel} />
 

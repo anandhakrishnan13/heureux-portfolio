@@ -5,16 +5,9 @@
   },
   "hero": {
     "sectionLabel": "init.session",
-    "command": "whoami --sudo",
-    "name": "Anandhakrishnan Nair",
+    "name": "Anandhakrishnan",
     "role": "Full Stack Developer",
     "bio": "I build supply chain and CRM systems. Shipped an ERP used across 7 facilities handling over a thousand orders a day, with live inventory tracking and auto-replenishment for 2,000+ products. Pursuing my MCA at Manipal and volunteering on the side.",
-    "typewriter": [
-      "build.supply_chain_systems()",
-      "ship.production_features()",
-      "reduce.order_latency()",
-      "manage.multi_facility_ops()"
-    ],
     "profileFocus": [
       "supply-chain",
       "CRM"
@@ -27,7 +20,7 @@
       "9b22e80": "feat: supply chain workflow automation",
       "3e1d4aa": "feat: achieved 100% inventory accuracy via QR tracking"
     },
-    "status": "online building production systems",
+    "status": "open to work",
     "cta": "View My Work",
     "photo": "/me.png",
     "photoAlt": "Anandhakrishnan Nair",

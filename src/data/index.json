@@ -9,12 +9,12 @@
     "role": "Full Stack Developer",
     "bio": "I build supply chain and CRM systems. Shipped an ERP used across 7 facilities handling over a thousand orders a day, with live inventory tracking and auto-replenishment for 2,000+ products. Pursuing my MCA at Manipal and volunteering on the side.",
     "profileFocus": [
-      "supply-chain",
-      "CRM"
+      "full-stack",
+      "web apps"
     ],
     "experience": "~1 yr production",
     "shipped": "9 production systems",
-    "target": "senior-track growth",
+    "target": "independent ownership",
     "gitLog": {
       "a4f12c1": "feat: automated supply chain replenishment (2K+ SKUs)",
       "9b22e80": "feat: supply chain workflow automation",
@@ -119,8 +119,6 @@
       "role": "Solo Developer",
       "action": "A bookmark manager that syncs across your devices. Uses Google Gemini so you can search your bookmarks with plain English queries. Jina AI scrapes pages into clean text before indexing. Has collections, favourites, and a trash bin with 30-day recovery.",
       "impact": "AI-powered semantic search with Google Gemini integration",
-      "metric": "AI",
-      "metricLabel": "Integrated",
       "stack": [
         "Next.js",
         "Supabase",
@@ -136,8 +134,6 @@
       "role": "Full Stack Developer",
       "action": "A student management system with separate portals for admins, teachers, and students. Handles attendance, timetables, and results through a Flutter frontend backed by Node.js.",
       "impact": "Serves admins, teachers, and students through role-based portals",
-      "metric": "3-tier",
-      "metricLabel": "RBAC",
       "stack": [
         "Flutter",
         "Node.js",
@@ -148,13 +144,26 @@
       "href": "https://github.com/anandhakrishnan13/academia"
     },
     {
+      "id": "005",
+      "name": "Daily Task Report",
+      "role": "Solo Developer",
+      "action": "A fully-automated n8n workflow that pulls your daily GitHub commits, turns them into a clean task report via Groq (LLaMA), sends it to Telegram for a yes/no/regenerate approval, and emails it once approved. Tracks reported commit SHAs in Google Sheets so it never repeats itself.",
+      "impact": "Scheduled daily at 8:30 PM with an LLM-generated, approval-gated report flow",
+      "stack": [
+        "n8n",
+        "Groq API",
+        "GitHub API",
+        "Telegram",
+        "Google Sheets"
+      ],
+      "href": "https://github.com/anandhakrishnan13/n8n"
+    },
+    {
       "id": "003",
       "name": "E-Commerce Admin Panel",
       "role": "Full Stack Developer",
       "action": "Built a full-featured admin dashboard for product, order, and inventory management.",
       "impact": "Reduced manual operations by 60% with centralized management",
-      "metric": "-60%",
-      "metricLabel": "ops",
       "stack": [
         "React.js",
         "Node.js",
@@ -171,8 +180,6 @@
       "role": "Full Stack Developer",
       "action": "Developed a dual-role job listing and application platform with smart filtering.",
       "impact": "Connected 200+ employers with candidates through smart filtering",
-      "metric": "200+",
-      "metricLabel": "employers",
       "stack": [
         "React.js",
         "Node.js",

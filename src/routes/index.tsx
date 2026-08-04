@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { motion } from "motion/react";
 import {
   ArrowUpRight,
@@ -86,6 +87,33 @@ function Line({ p, cmd }: { p: string; cmd: string }) {
 }
 
 function Index() {
+  useEffect(() => {
+    const ids = ["hero", "stack", "experience", "projects", "education", "volunteer", "contact"];
+    const els = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+
+    const apply = () => {
+      const mid = window.innerHeight * 0.5;
+      let activeIdx = 0;
+      for (let i = 0; i < els.length; i++) {
+        const r = els[i].getBoundingClientRect();
+        if (r.top <= mid && r.bottom > mid) {
+          activeIdx = i;
+          break;
+        }
+      }
+      const blurred = new Set<string>();
+      if (activeIdx >= 1) blurred.add(ids[activeIdx - 1]);
+      if (activeIdx < ids.length - 1) blurred.add(ids[activeIdx + 1]);
+      els.forEach((el) => {
+        el.classList.toggle("blur-next", blurred.has(el.id));
+      });
+    };
+
+    apply();
+    window.addEventListener("scroll", apply, { passive: true });
+    return () => window.removeEventListener("scroll", apply);
+  }, []);
+
   return (
     <div className="relative">
       <NavDock />
@@ -107,7 +135,7 @@ function Index() {
 function Hero() {
   const hero = data.hero;
   return (
-    <section id="hero" className="snap-section relative justify-center px-6">
+    <section id="hero" className="snap-section relative px-6 py-18">
       <div className="absolute inset-0 grid-bg" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/40 to-transparent" />
 
@@ -250,8 +278,8 @@ function Stack() {
     Infrastructure: Cloud,
   } as const;
   return (
-    <section id="stack" className="snap-section relative justify-center bg-surface px-6">
-      <div className="mx-auto w-full max-w-6xl">
+    <section id="stack" className="snap-section relative px-6 py-18">
+      <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="02" name={section.sectionLabel} />
         <SectionHeading section={section} />
         <p className="mt-2 max-w-md text-justify text-sm text-muted-foreground">
@@ -329,8 +357,8 @@ function Projects() {
   const archivedProjects = data.projects.filter((p) => p.archived);
 
   return (
-    <section id="projects" className="snap-section relative justify-center px-6">
-      <div className="mx-auto w-full max-w-6xl py-10">
+    <section id="projects" className="snap-section relative px-6 py-18">
+      <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="04" name={section.sectionLabel} />
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
           <SectionHeading section={section} />
@@ -364,14 +392,6 @@ function Projects() {
                     <span>{p.role}</span>
                   </div>
                   <h3 className="mt-2 font-mono-display text-2xl font-semibold">{p.name}</h3>
-                </div>
-                <div className="rounded-md border border-term-green/30 bg-term-green/5 px-2.5 py-1.5 text-right shrink-0">
-                  <div className="font-mono-display text-base font-bold text-term-green leading-none">
-                    {p.metric}
-                  </div>
-                  <div className="font-meta text-tag text-term-green/80 mt-0.5">
-                    {p.metricLabel}
-                  </div>
                 </div>
               </div>
 
@@ -416,8 +436,8 @@ function Projects() {
 function Experience() {
   const section = data.sections.experience;
   return (
-    <section id="experience" className="snap-section relative justify-center bg-surface px-6">
-      <div className="mx-auto w-full max-w-6xl py-10">
+    <section id="experience" className="snap-section relative px-6 py-18">
+      <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="03" name={section.sectionLabel} />
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
           <SectionHeading section={section} />
@@ -487,8 +507,8 @@ function Experience() {
 function Volunteer() {
   const section = data.sections.volunteer;
   return (
-    <section id="volunteer" className="snap-section relative justify-center px-6">
-      <div className="mx-auto w-full max-w-6xl py-10">
+    <section id="volunteer" className="snap-section relative px-6 py-18">
+      <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="06" name={section.sectionLabel} />
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
           <SectionHeading section={section} />
@@ -541,8 +561,8 @@ function Volunteer() {
 function Education() {
   const section = data.sections.education;
   return (
-    <section id="education" className="snap-section relative justify-center px-6">
-      <div className="mx-auto w-full max-w-6xl py-10">
+    <section id="education" className="snap-section relative px-6 py-18">
+      <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="05" name={section.sectionLabel} />
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
           <SectionHeading section={section} />
@@ -589,8 +609,8 @@ function Education() {
 function Contact() {
   const section = data.sections.contact;
   return (
-    <section id="contact" className="snap-section relative justify-center bg-surface px-6">
-      <div className="mx-auto w-full max-w-4xl py-10 text-center">
+    <section id="contact" className="snap-section relative px-6 py-18">
+      <div className="mx-auto flex w-full max-w-4xl flex-col text-center">
         <SectionLabel index="07" name={section.sectionLabel} />
 
         <h2 className="mt-8 font-mono-display text-5xl font-bold tracking-tight md:text-6xl">

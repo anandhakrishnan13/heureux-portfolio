@@ -170,9 +170,15 @@
 }
 
 @utility snap-section {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: filter 500ms ease, opacity 500ms ease, transform 500ms ease;
+}
+
+@utility blur-next {
+  filter: blur(6px) saturate(0.85);
+  opacity: 0.55;
+  transform: scale(0.985);
 }
 
 @keyframes blink {
@@ -209,7 +215,7 @@
   }
 }
 
-@media (width >= 48rem) {
+@media (width >= 64rem) {
   .grid-cols-hero {
     grid-template-columns: 1.4fr 1fr;
   }

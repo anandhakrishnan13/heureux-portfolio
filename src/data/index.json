@@ -1,25 +1,17 @@
 {
   "meta": {
-    "title": "Anandhakrishnan Nair — Full Stack Developer",
+    "title": "Anandhakrishnan Nair \u2014 Full Stack Developer",
     "description": "Full Stack Developer building supply chain and CRM systems. Production experience with measurable impact."
   },
   "hero": {
-    "sectionLabel": "init.session",
+    "sectionLabel": "Intro",
     "name": "Anandhakrishnan",
     "role": "Full Stack Developer",
-    "bio": "Full-Stack Developer with 1+ year of experience engineering supply-chain systems — production planning, inventory, and vendor replenishment across 7 facilities processing 1,000+ orders a day across 2,700+ SKUs. Pursuing my MCA at Manipal.",
-    "profileFocus": [
-      "full-stack",
-      "web apps"
-    ],
+    "bio": "Full-Stack Developer with 1+ year of experience engineering supply-chain systems \u2014 production planning, inventory, and vendor replenishment across 7 facilities processing 1,000+ orders a day across 2,700+ SKUs. Pursuing my MCA at Manipal.",
+    "profileFocus": ["full-stack", "web apps"],
     "experience": "~1 yr production",
     "shipped": "9 production systems",
     "target": "independent ownership",
-    "gitLog": {
-      "a4f12c1": "feat: automated supply chain replenishment (2,700+ SKUs)",
-      "9b22e80": "feat: supply chain workflow automation",
-      "3e1d4aa": "feat: qr-based inventory tracking with uuid labels"
-    },
     "status": "open to work",
     "cta": "View My Work",
     "photo": "/me.png",
@@ -29,7 +21,7 @@
   },
   "sections": {
     "stack": {
-      "sectionLabel": "stack.manifest",
+      "sectionLabel": "Stack",
       "heading": "What I work with.",
       "highlight": "work with",
       "subtitle": "Tools I use in production across supply-chain systems and web apps.",
@@ -41,7 +33,7 @@
       }
     },
     "projects": {
-      "sectionLabel": "projects.log",
+      "sectionLabel": "Projects",
       "heading": "Personal works.",
       "highlight": "works",
       "githubUrl": "https://github.com/anandhakrishnan13",
@@ -49,31 +41,26 @@
       "sourceLabel": "source"
     },
     "experience": {
-      "sectionLabel": "experience.sh",
+      "sectionLabel": "Experience",
       "heading": "Production experience.",
       "highlight": "experience"
     },
     "volunteer": {
-      "sectionLabel": "volunteer.log",
+      "sectionLabel": "Volunteer",
       "heading": "Community.",
       "highlight": "Community"
     },
     "education": {
-      "sectionLabel": "education.txt",
+      "sectionLabel": "Education",
       "heading": "Academic background.",
       "highlight": "background"
     },
     "contact": {
-      "sectionLabel": "connect.handshake",
+      "sectionLabel": "Contact",
       "heading": "Start a conversation.",
       "highlight": "Start a conversation",
       "subtitle": "Looking for full-time work and interesting projects. Let's talk.",
-      "ssh": "ssh anand@portfolio.dev",
-      "features": [
-        "response time less than 24h",
-        "timezone flexible (IST)",
-        "open to remote"
-      ],
+      "features": ["response time less than 24h", "timezone flexible (IST)", "open to remote"],
       "email": "anandhakrishnannair13@gmail.com",
       "linkedinUrl": "https://www.linkedin.com/in/anandmn",
       "linkedinLabel": "LinkedIn",
@@ -122,13 +109,8 @@
       "name": "Load Balancer",
       "role": "Solo Developer",
       "action": "A Layer-7 HTTP load balancer in Go spreading traffic across servers behind a single endpoint, with round-robin, least-connections, and latency-based power-of-two-choices routing driven by live in-flight counts and response times. Lock-free request path, active health checks, graceful shutdown, async SQLite logging, and a Next.js live dashboard.",
-      "impact": "Latency-based routing hit 1,932 req/s at 1.3ms median vs 182 req/s for round-robin — ~10x throughput",
-      "stack": [
-        "Go",
-        "Next.js",
-        "SQLite",
-        "Docker Compose"
-      ],
+      "impact": "Latency-based routing hit 1,932 req/s at 1.3ms median vs 182 req/s for round-robin \u2014 ~10x throughput",
+      "stack": ["Go", "Next.js", "SQLite", "Docker Compose"],
       "href": "https://github.com/anandhakrishnan13"
     },
     {
@@ -137,13 +119,7 @@
       "role": "Solo Developer",
       "action": "A bookmark manager that syncs across your devices. Uses Google Gemini so you can search your bookmarks with plain English queries. Jina AI scrapes pages into clean text before indexing. Has collections, favourites, and a trash bin with 30-day recovery.",
       "impact": "AI-powered semantic search with Google Gemini integration",
-      "stack": [
-        "Next.js",
-        "Supabase",
-        "Gemini API",
-        "Jina AI",
-        "TypeScript"
-      ],
+      "stack": ["Next.js", "Supabase", "Gemini API", "Jina AI", "TypeScript"],
       "href": "https://github.com/anandhakrishnan13"
     },
     {
@@ -152,13 +128,7 @@
       "role": "Full Stack Developer",
       "action": "A student management app with three-tier role-based access across attendance, timetables, and exam results, backed by Node.js. Includes a progress dashboard, student profiles, and a notifications and events page surfacing updates to the right audience.",
       "impact": "Three-tier RBAC serving admins, teachers, and students",
-      "stack": [
-        "Flutter",
-        "Node.js",
-        "Express.js",
-        "SQLite",
-        "REST APIs"
-      ],
+      "stack": ["Flutter", "Node.js", "Express.js", "SQLite", "REST APIs"],
       "href": "https://github.com/anandhakrishnan13/academia"
     },
     {
@@ -167,14 +137,7 @@
       "role": "Solo Developer",
       "action": "Turns any GitHub user's commits into a plain-language daily summary with Groq. Skips already-reported commits via history in Google Sheets, routes the draft to Telegram for one-tap approval, and emails the confirmed version.",
       "impact": "Approval-gated daily summaries with Sheets-backed dedup",
-      "stack": [
-        "n8n",
-        "Groq API",
-        "GitHub API",
-        "Telegram",
-        "Gmail",
-        "Google Sheets"
-      ],
+      "stack": ["n8n", "Groq API", "GitHub API", "Telegram", "Gmail", "Google Sheets"],
       "href": "https://github.com/anandhakrishnan13/n8n"
     }
   ],
@@ -185,41 +148,26 @@
     "period": "August 2025 - Present",
     "projects": {
       "Production Plan": {
-        "stack": [
-          "Next.js",
-          "Express.js",
-          "MongoDB",
-          "BullMQ"
-        ],
+        "stack": ["Next.js", "Express.js", "MongoDB", "BullMQ"],
         "highlights": [
           "Supports operations across 7 facilities processing 1,000+ orders daily across 2,700+ SKUs, secured with JWT authentication and action-, facility-, and role-based access controls.",
-          "Prioritises daily orders with escalated orders ranked first, assigns them across facilities, and generates serial and batch numbers for batches of 300-500 orders — tracking each through work-in-progress, vacuum completion, and dispatch.",
+          "Prioritises daily orders with escalated orders ranked first, assigns them across facilities, and generates serial and batch numbers for batches of 300-500 orders \u2014 tracking each through work-in-progress, vacuum completion, and dispatch.",
           "Generates batch-specific MRP labels with QC markings for the production floor, flagging escalated orders for priority handling and repeat quality checks; BOM-based foam allocation suggestions plus scrap tracking keep raw-material use traceable.",
-          "Gates QC and dispatch on production state — only work-in-progress orders enter QC, only vacuum-complete orders dispatch — with cancellation, shipper-weight, and shipper-allocation checks cutting wasted dispatches."
+          "Gates QC and dispatch on production state \u2014 only work-in-progress orders enter QC, only vacuum-complete orders dispatch \u2014 with cancellation, shipper-weight, and shipper-allocation checks cutting wasted dispatches."
         ]
       },
       "Inventory Management": {
-        "stack": [
-          "React.js",
-          "Express.js",
-          "MongoDB",
-          "Shadcn"
-        ],
+        "stack": ["React.js", "Express.js", "MongoDB", "Shadcn"],
         "highlights": [
           "Batch-based Goods Receipt Notes (GRNs) with QR-scan driven raw-material consumption and UUID-based QR label generation.",
           "BullMQ workers sync Unicommerce inventory and log per-order raw-material consumption from Bills of Materials; a Production Plan trigger ingests eligible mattress orders and updates changed ones."
         ]
       },
       "Vendor Replenishment & Vendor App": {
-        "stack": [
-          "Next.js",
-          "Express.js",
-          "MongoDB",
-          "Tailwind CSS"
-        ],
+        "stack": ["Next.js", "Express.js", "MongoDB", "Tailwind CSS"],
         "highlights": [
           "Vendor Replenishment plus a standalone Vendor App supporting inward processing with QR labels.",
-          "3PL warehouse stock dashboard with trend graphs, norm-based out-of-stock and over-limit flags, vendor activity tracking, and automatic reordering at Minimum Order Quantity (MOQ) — helping reduce stock-outs."
+          "3PL warehouse stock dashboard with trend graphs, norm-based out-of-stock and over-limit flags, vendor activity tracking, and automatic reordering at Minimum Order Quantity (MOQ) \u2014 helping reduce stock-outs."
         ]
       }
     }

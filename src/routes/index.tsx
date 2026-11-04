@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "motion/react";
+import { motion, MotionConfig } from "motion/react";
 import {
   ArrowUpRight,
   Github,
@@ -15,7 +15,6 @@ import {
   Wrench,
   Layers,
   GitBranch,
-  ChevronRight,
   MapPin,
   Calendar,
   ExternalLink,
@@ -52,10 +51,10 @@ type Section = {
 
 /* Shared class recipes for the shadcn primitives used across sections. */
 const ctaPrimary =
-  "h-auto gap-2 rounded-lg bg-cyan px-5 py-3 font-mono-display text-sm font-medium text-cyan-foreground shadow-glow-cta transition hover:bg-cyan hover:brightness-110";
+  "h-auto gap-2 rounded-lg bg-cyan px-5 py-3 text-sm font-medium text-cyan-foreground transition hover:bg-cyan hover:brightness-110";
 const ctaSecondary =
-  "h-auto gap-2 rounded-lg border-border bg-surface/60 px-5 py-3 font-mono-display text-sm font-normal text-foreground shadow-none transition hover:border-cyan/40 hover:bg-surface/60 hover:text-cyan";
-const chip = "border-0 px-3 py-1.5 font-mono-display text-xs font-normal ring-1 ring-border";
+  "h-auto gap-2 rounded-lg border-border bg-surface/60 px-5 py-3 text-sm font-normal text-foreground shadow-none transition hover:border-cyan/40 hover:bg-surface/60 hover:text-cyan";
+const chip = "border-0 px-3 py-1.5 text-xs font-normal ring-1 ring-border";
 const tag =
   "border-0 px-2 py-1 font-meta text-[length:var(--text-tag)] font-normal ring-1 ring-border";
 
@@ -83,7 +82,7 @@ function SectionLabel({ index, name }: { index: string; name: string }) {
 function SectionHeading({ section, className }: { section: Section; className?: string }) {
   const parts = section.heading.split(section.highlight);
   return (
-    <h2 className={className ?? "font-mono-display text-3xl font-bold tracking-tight md:text-5xl"}>
+    <h2 className={className ?? "text-3xl font-bold tracking-tight md:text-5xl"}>
       {parts[0]}
       <span className="text-cyan">{section.highlight}</span>
       {parts[1]}
@@ -91,29 +90,22 @@ function SectionHeading({ section, className }: { section: Section; className?: 
   );
 }
 
-function Line({ p, cmd }: { p: string; cmd: string }) {
-  return (
-    <div className="flex gap-2 text-muted-foreground">
-      <span className="text-cyan">{p}</span>
-      <span className="text-foreground">{cmd}</span>
-    </div>
-  );
-}
-
 function Index() {
   return (
-    <div className="relative">
-      <NavDock />
-      <main className="scroll-smooth">
-        <Hero />
-        <Stack />
-        <Experience />
-        <Projects />
-        <Education />
-        <Volunteer />
-        <Contact />
-      </main>
-    </div>
+    <MotionConfig reducedMotion="user">
+      <div className="relative">
+        <NavDock />
+        <main className="scroll-smooth">
+          <Hero />
+          <Stack />
+          <Experience />
+          <Projects />
+          <Education />
+          <Volunteer />
+          <Contact />
+        </main>
+      </div>
+    </MotionConfig>
   );
 }
 
@@ -123,7 +115,7 @@ function Hero() {
   const hero = data.hero;
   return (
     <section id="hero" className="relative px-6 py-18">
-      <div className="absolute inset-0 grid-bg" />
+      <div className="absolute inset-0" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/40 to-transparent" />
 
       <div className="relative mx-auto flex w-full max-w-6xl flex-col">
@@ -134,7 +126,7 @@ function Hero() {
         <div className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] md:items-start">
           <div className="min-w-0">
             <div
-              className="card-glow anim-left mb-6 inline-block overflow-hidden rounded-full p-1"
+              className="anim-left mb-6 inline-block overflow-hidden rounded-full border border-border p-1"
               style={{ animationDelay: "0.4s" }}
             >
               <img
@@ -147,21 +139,20 @@ function Hero() {
             </div>
 
             <h1
-              className="anim-rise mt-6 flex flex-wrap items-center gap-x-2 font-mono-display text-3xl font-bold leading-tight tracking-tight md:text-5xl"
+              className="anim-rise mt-6 flex flex-wrap items-center gap-x-2 text-3xl font-bold leading-tight tracking-tight md:text-5xl"
               style={{ animationDelay: "0.2s" }}
             >
-              <span className="text-2xl text-muted-foreground md:text-4xl">$</span>
               <span className="text-foreground">{hero.name}</span>
             </h1>
             <p
-              className="anim-rise mt-2 min-h-[1.5em] font-mono-display text-lg font-normal text-muted-foreground md:text-xl"
+              className="anim-rise mt-2 min-h-[1.5em] text-lg font-normal text-muted-foreground md:text-xl"
               style={{ animationDelay: "0.5s" }}
             >
               <Typewriter words={[hero.role]} />
             </p>
 
             <p
-              className="anim-rise mt-6 max-w-xl text-left text-base text-muted-foreground sm:text-justify md:text-lg"
+              className="anim-rise mt-6 max-w-xl text-left text-base text-muted-foreground md:text-lg"
               style={{ animationDelay: "0.5s" }}
             >
               {hero.bio}
@@ -169,45 +160,24 @@ function Hero() {
           </div>
 
           <div className="flex min-w-0 flex-col gap-6">
-            <div
-              className="card-glow scanline anim-right overflow-hidden"
-              style={{ animationDelay: "0.4s" }}
-            >
-              <div className="flex items-center justify-between border-b border-border/60 bg-surface-2/60 px-4 py-2.5">
-                <div className="flex items-center gap-1.5">
-                  <span className="size-2.5 rounded-full bg-destructive/70" />
-                  <span className="size-2.5 rounded-full bg-term-amber/80" />
-                  <span className="size-2.5 rounded-full bg-term-green/80" />
-                </div>
-                <ChevronRight className="size-3 text-muted-foreground" />
-              </div>
-              <div className="space-y-2.5 p-5 font-mono-display text-terminal leading-relaxed">
-                <Line p="$" cmd="cat profile.json" />
-                <pre className="overflow-x-auto rounded-md bg-background/60 p-3 text-xs whitespace-pre-wrap break-words text-foreground/90">
-                  {JSON.stringify(
-                    {
-                      focus: hero.profileFocus,
-                      experience: hero.experience,
-                      shipped: hero.shipped,
-                      target: hero.target,
-                    },
-                    null,
-                    2,
-                  )}
-                </pre>
-                <Line p="$" cmd="git log --oneline -3" />
-                <div className="space-y-1 pl-2 text-muted-foreground">
-                  {Object.entries(hero.gitLog).map(([hash, msg]) => (
-                    <div key={hash}>
-                      <span className="text-term-amber">{hash}</span> {msg}
-                    </div>
-                  ))}
-                </div>
-                <Line p="$" cmd="status" />
-                <div className="flex items-center gap-2 pl-2 text-term-green">
-                  <span className="size-1.5 rounded-full bg-term-green shadow-dot" />
-                  {hero.status}
-                </div>
+            <div className="panel anim-right p-6" style={{ animationDelay: "0.4s" }}>
+              <div className="font-meta text-muted-foreground">At a glance</div>
+              <dl className="mt-5 space-y-4">
+                {[
+                  ["Focus", hero.profileFocus.join(" · ")],
+                  ["Experience", hero.experience],
+                  ["Shipped", hero.shipped],
+                  ["Looking for", hero.target],
+                ].map(([label, value]) => (
+                  <div key={label} className="flex flex-wrap items-baseline justify-between gap-2">
+                    <dt className="text-sm text-muted-foreground">{label}</dt>
+                    <dd className="text-sm font-medium text-foreground">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="mt-6 flex items-center gap-2 border-t border-border pt-4 text-sm text-foreground">
+                <span className="size-2 rounded-full bg-term-green" />
+                {hero.status}
               </div>
             </div>
 
@@ -254,9 +224,7 @@ function Stack() {
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="02" name={section.sectionLabel} />
         <SectionHeading section={section} />
-        <p className="mt-2 max-w-md text-left text-sm text-muted-foreground sm:text-justify">
-          {section.subtitle}
-        </p>
+        <p className="mt-2 max-w-md text-left text-sm text-muted-foreground">{section.subtitle}</p>
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {(Object.keys(data.stack) as Array<keyof typeof data.stack>).map((layer, idx) => {
@@ -268,7 +236,7 @@ function Stack() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ delay: idx * 0.08 }}
-                className="card-glow card-glow-hover p-6"
+                className="panel panel-hover p-6"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -279,7 +247,7 @@ function Stack() {
                       <div className="font-meta text-meta text-muted-foreground">
                         layer.0{idx + 1}
                       </div>
-                      <div className="font-mono-display text-base font-semibold">{layer}</div>
+                      <div className="text-base font-semibold">{layer}</div>
                     </div>
                   </div>
                   <Layers className="size-4 text-muted-foreground" />
@@ -308,10 +276,10 @@ function Stack() {
         <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
           {Object.entries(section.stats).map(([label, key]) => (
             <div key={label} className="rounded-lg border border-border bg-background/40 p-4">
-              <div className="font-mono-display text-2xl font-bold text-cyan">
+              <div className="text-2xl font-bold text-cyan">
                 {key === null ? getExperienceLabel() : key}
               </div>
-              <div className="mt-1 text-left font-meta text-meta text-muted-foreground sm:text-justify">
+              <div className="mt-1 text-left font-meta text-meta text-muted-foreground">
                 {label}
               </div>
             </div>
@@ -338,7 +306,7 @@ function Projects() {
             href={section.githubUrl}
             target="_blank"
             rel="noreferrer"
-            className="relative inline-flex items-center gap-2 font-mono-display text-xs text-muted-foreground transition before:absolute before:-inset-2 before:content-[''] hover:text-cyan"
+            className="relative inline-flex items-center gap-2 text-xs text-muted-foreground transition before:absolute before:-inset-2 before:content-[''] hover:text-cyan"
           >
             <GitBranch className="size-3.5" />
             {section.allReposLabel}
@@ -354,7 +322,7 @@ function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: i * 0.06 }}
-              className="card-glow card-glow-hover group relative flex flex-col p-6"
+              className="panel panel-hover group relative flex flex-col p-6"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -363,15 +331,13 @@ function Projects() {
                     <Separator className="h-px w-4 bg-border" />
                     <span>{p.role}</span>
                   </div>
-                  <h3 className="mt-2 font-mono-display text-2xl font-semibold">{p.name}</h3>
+                  <h3 className="mt-2 text-2xl font-semibold">{p.name}</h3>
                 </div>
               </div>
 
-              <p className="mt-4 text-left text-sm text-muted-foreground sm:text-justify">
-                {p.action}
-              </p>
+              <p className="mt-4 text-left text-sm text-muted-foreground">{p.action}</p>
 
-              <div className="mb-5 flex items-center gap-2 font-mono-display text-xs text-term-green">
+              <div className="mt-3 mb-5 flex items-center gap-2 text-xs text-term-green">
                 <TrendingUp className="size-3.5 shrink-0" />
                 {p.impact}
               </div>
@@ -392,7 +358,7 @@ function Projects() {
                   href={p.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="relative inline-flex items-center gap-1 font-mono-display text-xs text-muted-foreground transition before:absolute before:-inset-2 before:content-[''] hover:text-cyan"
+                  className="relative inline-flex items-center gap-1 text-xs text-muted-foreground transition before:absolute before:-inset-2 before:content-[''] hover:text-cyan"
                 >
                   {section.sourceLabel}
                   <ArrowUpRight className="size-3.5" />
@@ -418,14 +384,12 @@ function Experience() {
           <SectionHeading section={section} />
         </div>
 
-        <div className="mt-8 card-glow p-6">
+        <div className="mt-8 panel p-6">
           <div className="flex flex-wrap items-start justify-between gap-4 border-b border-border/60 pb-4">
             <div>
               <div className="flex items-center gap-2">
                 <img src="/flo.svg" alt="Flo Sleep Solutions" className="h-5 w-auto" />
-                <h3 className="font-mono-display text-xl font-semibold">
-                  {data.experience.company}
-                </h3>
+                <h3 className="text-xl font-semibold">{data.experience.company}</h3>
               </div>
               <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1">
@@ -440,7 +404,7 @@ function Experience() {
             </div>
             <Badge
               variant="outline"
-              className="border border-cyan/30 bg-cyan/5 px-3 py-1.5 font-mono-display text-xs font-normal text-cyan"
+              className="border border-cyan/30 bg-cyan/5 px-3 py-1.5 text-xs font-normal text-cyan"
             >
               {data.experience.role}
             </Badge>
@@ -449,7 +413,7 @@ function Experience() {
           <div className="mt-6 grid gap-5 md:grid-cols-2">
             {Object.entries(data.experience.projects).map(([name, proj]) => (
               <div key={name} className="rounded-lg border border-border/60 bg-background/40 p-5">
-                <h4 className="font-mono-display text-sm font-semibold text-cyan">{name}</h4>
+                <h4 className="text-sm font-semibold text-cyan">{name}</h4>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {proj.stack.map((s) => (
                     <Badge
@@ -465,7 +429,7 @@ function Experience() {
                   {proj.highlights.map((h, i) => (
                     <li
                       key={i}
-                      className="flex gap-2 text-left text-xs leading-relaxed text-muted-foreground sm:text-justify"
+                      className="flex gap-2 text-left text-xs leading-relaxed text-muted-foreground"
                     >
                       <span className="mt-1 size-1 shrink-0 rounded-full bg-cyan/60" />
                       {h}
@@ -501,17 +465,15 @@ function Volunteer() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: i * 0.1 }}
-              className="card-glow card-glow-hover p-6"
+              className="panel panel-hover p-6"
             >
               <div className="flex items-start gap-3">
                 <div className="grid size-9 shrink-0 place-items-center rounded-md bg-rose-500/10 text-rose-500 ring-1 ring-rose-500/30">
                   <Heart className="size-4" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="font-mono-display text-base font-semibold">{v.organization}</h3>
-                  <p className="mt-1 text-left text-sm text-muted-foreground sm:text-justify">
-                    {v.role}
-                  </p>
+                  <h3 className="text-base font-semibold">{v.organization}</h3>
+                  <p className="mt-1 text-left text-sm text-muted-foreground">{v.role}</p>
                   <span className="mt-2 inline-flex items-center gap-1 text-xs text-muted-foreground">
                     <Calendar className="size-3" />
                     {v.period}
@@ -520,7 +482,7 @@ function Volunteer() {
                     {v.highlights.map((h, j) => (
                       <li
                         key={j}
-                        className="flex gap-2 text-left text-xs leading-relaxed text-muted-foreground sm:text-justify"
+                        className="flex gap-2 text-left text-xs leading-relaxed text-muted-foreground"
                       >
                         <span className="mt-1 size-1 shrink-0 rounded-full bg-rose-500/60" />
                         {h}
@@ -557,21 +519,19 @@ function Education() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: i * 0.1 }}
-              className="card-glow card-glow-hover p-6"
+              className="panel panel-hover p-6"
             >
               <div className="flex items-start gap-3">
                 <div className="grid size-9 shrink-0 place-items-center rounded-md bg-term-green/10 text-term-green ring-1 ring-term-green/30">
                   <ExternalLink className="size-4" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="font-mono-display text-base font-semibold">{edu.school}</h3>
-                  <p className="mt-1 text-left text-sm text-muted-foreground sm:text-justify">
-                    {edu.degree}
-                  </p>
+                  <h3 className="text-base font-semibold">{edu.school}</h3>
+                  <p className="mt-1 text-left text-sm text-muted-foreground">{edu.degree}</p>
                   <div className="mt-3 flex flex-wrap items-center gap-3 text-xs">
                     <Badge
                       variant="outline"
-                      className="border border-term-green/30 bg-term-green/5 px-2 py-1 font-mono-display text-[length:var(--text-tag)] font-normal text-term-green"
+                      className="border border-term-green/30 bg-term-green/5 px-2 py-1 text-[length:var(--text-tag)] font-normal text-term-green"
                     >
                       {edu.score}
                     </Badge>
@@ -599,29 +559,30 @@ function Contact() {
       <div className="mx-auto flex w-full max-w-4xl flex-col text-center">
         <SectionLabel index="07" name={section.sectionLabel} />
 
-        <h2 className="mt-8 font-mono-display text-4xl font-bold tracking-tight md:text-6xl">
+        <h2 className="mt-8 text-4xl font-bold tracking-tight md:text-6xl">
           <span className="text-cyan">{section.highlight}</span>
           {section.heading.replace(section.highlight, "")}
         </h2>
-        <p className="mx-auto mt-5 max-w-xl text-left text-base text-muted-foreground sm:text-justify">
+        <p className="mx-auto mt-5 max-w-xl text-left text-base text-muted-foreground">
           {section.subtitle}
         </p>
 
-        <div className="mx-auto mt-8 max-w-xl card-glow p-1.5 text-left">
-          <div className="rounded-md bg-background/60 p-5 font-mono-display text-sm">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <span className="text-term-green">~</span>
-              <span className="text-cyan">$</span>
-              <span>{section.ssh}</span>
-            </div>
-            <div className="mt-3 space-y-1.5 pl-5 text-xs text-muted-foreground">
-              {section.features.map((f) => (
-                <div key={f}>
-                  <span className="text-term-green">✓</span> {f}
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="panel mx-auto mt-8 max-w-xl p-6 text-left">
+          <div className="font-meta text-muted-foreground">Email</div>
+          <a
+            href={`mailto:${section.email}`}
+            className="mt-2 block text-base text-foreground underline-offset-4 hover:text-cyan hover:underline"
+          >
+            {section.email}
+          </a>
+          <ul className="mt-5 space-y-2 border-t border-border pt-5 text-sm text-muted-foreground">
+            {section.features.map((f) => (
+              <li key={f} className="flex gap-2">
+                <span className="mt-2 size-1 shrink-0 rounded-full bg-cyan" />
+                {f}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

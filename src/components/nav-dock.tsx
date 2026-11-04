@@ -24,13 +24,13 @@ import {
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const items = [
-  { id: "hero", label: "init", icon: Terminal },
-  { id: "stack", label: "stack", icon: Boxes },
-  { id: "experience", label: "exp", icon: Briefcase },
-  { id: "projects", label: "proj", icon: FolderGit2 },
-  { id: "education", label: "edu", icon: GraduationCap },
-  { id: "volunteer", label: "vol", icon: Heart },
-  { id: "contact", label: "contact", icon: Send },
+  { id: "hero", label: "Intro", icon: Terminal },
+  { id: "stack", label: "Stack", icon: Boxes },
+  { id: "experience", label: "Experience", icon: Briefcase },
+  { id: "projects", label: "Projects", icon: FolderGit2 },
+  { id: "education", label: "Education", icon: GraduationCap },
+  { id: "volunteer", label: "Volunteer", icon: Heart },
+  { id: "contact", label: "Contact", icon: Send },
 ];
 
 export function NavDock() {
@@ -68,10 +68,10 @@ export function NavDock() {
         aria-label="Sections"
         className="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 md:block"
       >
-        <div className="glass-dock flex max-w-[calc(100vw-1.5rem)] items-center gap-1 overflow-x-auto rounded-lg p-1.5">
+        <div className="dock flex max-w-[calc(100vw-1.5rem)] items-center gap-1 overflow-x-auto rounded-lg p-1.5">
           <div className="hidden items-center gap-2 border-r border-border/60 px-3 py-1.5 font-meta text-meta text-muted-foreground lg:flex">
-            <span className="size-1.5 rounded-full bg-term-green shadow-dot" />
-            <span>anand@portfolio</span>
+            <span className="size-1.5 rounded-full bg-term-green" />
+            <span>Anandhakrishnan Nair</span>
           </div>
           {items.map((it, i) => {
             const Icon = it.icon;
@@ -85,7 +85,7 @@ export function NavDock() {
                     onClick={() => go(it.id)}
                     aria-label={it.label}
                     aria-current={isActive ? "true" : undefined}
-                    className={`relative h-auto gap-2 rounded-md px-3 py-2 font-mono-display text-xs font-normal [&_svg]:size-3.5 ${
+                    className={`relative h-auto gap-2 rounded-md px-3 py-2 text-xs font-normal [&_svg]:size-3.5 ${
                       isActive ? "text-cyan" : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
@@ -95,11 +95,11 @@ export function NavDock() {
                     <Icon className="size-3.5" strokeWidth={2} />
                     <span className="hidden lg:inline">{it.label}</span>
                     {isActive && (
-                      <span className="absolute inset-0 -z-10 rounded-md bg-cyan/10 ring-1 ring-cyan/30 shadow-glow-active" />
+                      <span className="absolute inset-0 -z-10 rounded-md bg-cyan/10 ring-1 ring-cyan/30" />
                     )}
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="top" className="font-mono-display">
+                <TooltipContent side="top" className="">
                   {it.label}
                 </TooltipContent>
               </Tooltip>
@@ -107,7 +107,7 @@ export function NavDock() {
           })}
           <Button
             asChild
-            className="ml-1 hidden h-auto gap-2 rounded-md bg-cyan px-3 py-2 font-mono-display text-xs font-medium text-cyan-foreground shadow-nav-cta transition hover:bg-cyan hover:brightness-110 xl:inline-flex"
+            className="ml-1 hidden h-auto gap-2 rounded-md bg-cyan px-3 py-2 text-xs font-medium text-cyan-foreground transition hover:bg-cyan hover:brightness-110 xl:inline-flex"
           >
             <a
               href="#contact"
@@ -116,7 +116,7 @@ export function NavDock() {
                 go("contact");
               }}
             >
-              hire_me<span className="opacity-60">()</span>
+              Hire me
             </a>
           </Button>
         </div>
@@ -124,15 +124,15 @@ export function NavDock() {
 
       {/* Narrow viewports: compact bar + bottom sheet with labelled, 44px+ targets. */}
       <nav aria-label="Sections" className="fixed inset-x-3 bottom-4 z-50 md:hidden">
-        <div className="glass-dock flex items-center gap-1 rounded-lg p-1.5">
+        <div className="dock flex items-center gap-1 rounded-lg p-1.5">
           <span className="flex min-w-0 flex-1 items-center gap-2 px-2.5 font-meta text-meta text-muted-foreground">
-            <span className="size-1.5 shrink-0 rounded-full bg-term-green shadow-dot" />
+            <span className="size-1.5 shrink-0 rounded-full bg-term-green" />
             <ActiveIcon className="size-3.5 shrink-0" strokeWidth={2} />
             <span className="truncate">{activeItem.label}</span>
           </span>
           <Button
             asChild
-            className="h-11 shrink-0 gap-2 rounded-md bg-cyan px-3 font-mono-display text-xs font-medium text-cyan-foreground shadow-nav-cta hover:bg-cyan"
+            className="h-11 shrink-0 gap-2 rounded-md bg-cyan px-3 text-xs font-medium text-cyan-foreground hover:bg-cyan"
           >
             <a
               href="#contact"
@@ -141,7 +141,7 @@ export function NavDock() {
                 go("contact");
               }}
             >
-              hire_me<span className="opacity-60">()</span>
+              Hire me
             </a>
           </Button>
           <Sheet open={open} onOpenChange={setOpen}>
@@ -155,10 +155,7 @@ export function NavDock() {
                 <Menu className="size-4" />
               </Button>
             </SheetTrigger>
-            <SheetContent
-              side="bottom"
-              className="glass-dock rounded-t-xl border-cyan/12 px-4 pt-4 pb-6"
-            >
+            <SheetContent side="bottom" className="dock rounded-t-xl border-cyan/12 px-4 pt-4 pb-6">
               <SheetHeader className="p-0 text-left">
                 <SheetTitle className="font-meta text-meta text-muted-foreground">
                   Sections
@@ -179,7 +176,7 @@ export function NavDock() {
                           variant="ghost"
                           onClick={() => go(it.id)}
                           aria-current={isActive ? "true" : undefined}
-                          className={`h-12 w-full justify-start gap-3 rounded-lg px-3 font-mono-display text-sm font-normal ${
+                          className={`h-12 w-full justify-start gap-3 rounded-lg px-3 text-sm font-normal ${
                             isActive
                               ? "bg-cyan/10 text-cyan ring-1 ring-cyan/30"
                               : "text-muted-foreground"
@@ -197,7 +194,7 @@ export function NavDock() {
               <Separator className="my-4 bg-border/60" />
               <Button
                 asChild
-                className="h-12 w-full gap-2 rounded-lg bg-cyan font-mono-display text-sm font-medium text-cyan-foreground shadow-nav-cta hover:bg-cyan"
+                className="h-12 w-full gap-2 rounded-lg bg-cyan text-sm font-medium text-cyan-foreground hover:bg-cyan"
               >
                 <a
                   href="#contact"
@@ -206,7 +203,7 @@ export function NavDock() {
                     go("contact");
                   }}
                 >
-                  hire_me<span className="opacity-60">()</span>
+                  Hire me
                 </a>
               </Button>
             </SheetContent>

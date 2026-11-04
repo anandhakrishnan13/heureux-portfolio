@@ -294,57 +294,77 @@ function Projects() {
         </div>
 
         <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {projects.map((p, i) => (
-            <motion.article
-              key={p.id}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ delay: i * 0.06 }}
-              className="panel panel-hover group relative flex flex-col p-6"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <div className="flex items-center gap-2 font-meta text-meta text-muted-foreground">
-                    <span className="text-cyan">{p.id}</span>
-                    <Separator className="h-px w-4 bg-border" />
-                    <span>{p.role}</span>
-                  </div>
-                  <h3 className="mt-2 text-2xl font-semibold">{p.name}</h3>
-                </div>
-              </div>
-
-              <p className="mt-4 text-left text-sm text-muted-foreground">{p.action}</p>
-
-              <div className="mt-3 mb-5 flex items-center gap-2 text-xs text-term-green">
+          {projects.map((p, i) => {
+            const wide = i === projects.length - 1 && projects.length % 2 === 1;
+            const impactLine = (
+              <div className="flex items-center gap-2 text-xs text-term-green">
                 <TrendingUp className="size-3.5 shrink-0" />
                 {p.impact}
               </div>
+            );
+            const sourceLink = (
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${section.sourceLabel} for ${p.name}`}
+                title={`Open ${section.sourceLabel}`}
+                className="relative mt-1 inline-flex size-7 shrink-0 items-center justify-center rounded-md border border-border/60 text-muted-foreground transition before:absolute before:-inset-2 before:content-[''] hover:border-cyan/40 hover:text-cyan"
+              >
+                <ArrowUpRight className="size-3.5" />
+              </a>
+            );
 
-              <div className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-border/60 pt-4">
-                <div className="flex flex-wrap gap-1.5">
-                  {p.stack.map((s) => (
-                    <Badge
-                      key={s}
-                      variant="outline"
-                      className={`${tag} bg-background/60 text-muted-foreground`}
-                    >
-                      {s}
-                    </Badge>
-                  ))}
+            return (
+              <motion.article
+                key={p.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: i * 0.06 }}
+                className={`panel panel-hover group relative flex flex-col p-6 ${
+                  wide ? "md:col-span-2" : ""
+                }`}
+              >
+                <div className={wide ? "md:flex md:items-start md:gap-12" : "flex flex-1 flex-col"}>
+                  <div className={wide ? "md:min-w-0 md:flex-1" : ""}>
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <div className="font-meta text-meta text-cyan">{p.id}</div>
+                        <h3 className="mt-2 text-2xl font-semibold">{p.name}</h3>
+                      </div>
+                      {sourceLink}
+                    </div>
+
+                    <p className="mt-4 text-left text-sm text-muted-foreground">{p.action}</p>
+
+                    {!wide && <div className="mt-3 md:mb-5">{impactLine}</div>}
+                  </div>
+
+                  <div
+                    className={
+                      wide
+                        ? "mt-5 flex flex-col justify-between gap-6 md:mt-0 md:w-[320px] md:shrink-0 md:self-stretch md:border-l md:border-border/60 md:pl-8"
+                        : "mt-auto flex flex-wrap items-center gap-3 border-t border-border/60 pt-4"
+                    }
+                  >
+                    <div className="flex flex-wrap gap-1.5">
+                      {p.stack.map((s) => (
+                        <Badge
+                          key={s}
+                          variant="outline"
+                          className={`${tag} bg-background/60 text-muted-foreground`}
+                        >
+                          {s}
+                        </Badge>
+                      ))}
+                    </div>
+                    {wide && <div className="flex flex-col items-start gap-2">{impactLine}</div>}
+                  </div>
                 </div>
-                <a
-                  href={p.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="relative inline-flex items-center gap-1 text-xs text-muted-foreground transition before:absolute before:-inset-2 before:content-[''] hover:text-cyan"
-                >
-                  {section.sourceLabel}
-                  <ArrowUpRight className="size-3.5" />
-                </a>
-              </div>
-            </motion.article>
-          ))}
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>

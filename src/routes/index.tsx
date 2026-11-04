@@ -6,8 +6,6 @@ import {
   Linkedin,
   Mail,
   TrendingUp,
-  Zap,
-  Cpu,
   Code2,
   Database,
   Cloud,
@@ -161,13 +159,11 @@ function Hero() {
 
           <div className="flex min-w-0 flex-col gap-6">
             <div className="panel anim-right p-6" style={{ animationDelay: "0.4s" }}>
-              <div className="font-meta text-muted-foreground">At a glance</div>
-              <dl className="mt-5 space-y-4">
+              <dl className="space-y-4">
                 {[
                   ["Focus", hero.profileFocus.join(" · ")],
                   ["Experience", hero.experience],
                   ["Shipped", hero.shipped],
-                  ["Looking for", hero.target],
                 ].map(([label, value]) => (
                   <div key={label} className="flex flex-wrap items-baseline justify-between gap-2">
                     <dt className="text-sm text-muted-foreground">{label}</dt>
@@ -410,9 +406,12 @@ function Experience() {
             </Badge>
           </div>
 
-          <div className="mt-6 grid gap-5 md:grid-cols-2">
+          <div className="mt-6 columns-1 gap-5 md:columns-2">
             {Object.entries(data.experience.projects).map(([name, proj]) => (
-              <div key={name} className="rounded-lg border border-border/60 bg-background/40 p-5">
+              <div
+                key={name}
+                className="mb-5 break-inside-avoid rounded-lg border border-border/60 bg-background/40 p-5"
+              >
                 <h4 className="text-sm font-semibold text-cyan">{name}</h4>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {proj.stack.map((s) => (
@@ -567,24 +566,6 @@ function Contact() {
           {section.subtitle}
         </p>
 
-        <div className="panel mx-auto mt-8 max-w-xl p-6 text-left">
-          <div className="font-meta text-muted-foreground">Email</div>
-          <a
-            href={`mailto:${section.email}`}
-            className="mt-2 block text-base text-foreground underline-offset-4 hover:text-cyan hover:underline"
-          >
-            {section.email}
-          </a>
-          <ul className="mt-5 space-y-2 border-t border-border pt-5 text-sm text-muted-foreground">
-            {section.features.map((f) => (
-              <li key={f} className="flex gap-2">
-                <span className="mt-2 size-1 shrink-0 rounded-full bg-cyan" />
-                {f}
-              </li>
-            ))}
-          </ul>
-        </div>
-
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild className={ctaPrimary}>
             <a href={`mailto:${section.email}`}>
@@ -604,12 +585,14 @@ function Contact() {
           </Button>
         </div>
 
-        <div className="mt-16 flex items-center justify-center gap-3 font-meta text-meta text-muted-foreground">
-          <Zap className="size-3 text-cyan" />
-          <span>{data.footer}</span>
-          <Separator className="h-px w-8 bg-border" />
-          <Cpu className="size-3" />
-          <span>&copy; {new Date().getFullYear()}</span>
+        <div className="mt-10 flex items-center justify-center gap-3 font-meta text-meta text-muted-foreground">
+          {section.features.map((f) => (
+            <span key={f}>{f}</span>
+          ))}
+        </div>
+
+        <div className="mt-6 text-center font-meta text-meta text-muted-foreground">
+          &copy; {new Date().getFullYear()}
         </div>
       </div>
     </section>

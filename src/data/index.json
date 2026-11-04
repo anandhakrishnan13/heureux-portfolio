@@ -11,7 +11,6 @@
     "profileFocus": ["full-stack", "web apps"],
     "experience": "~1 yr production",
     "shipped": "9 production systems",
-    "target": "independent ownership",
     "status": "open to work",
     "cta": "View My Work",
     "photo": "/me.png",
@@ -68,7 +67,6 @@
       "githubLabel": "GitHub"
     }
   },
-  "footer": "anand-portfolio v1.0",
   "stack": {
     "Frontend": {
       "React": "react",

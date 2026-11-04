@@ -79,9 +79,14 @@
       "Go": "go",
       "REST APIs": null,
       "JWT / OAuth": null,
-      "Microservices": null
+      "Microservices": null,
+      "FastAPI": "fastapi",
+      "Fastify": "fastify",
+      "Python": "python",
+      "WebSockets": null
     },
     "Data": {
+      "PostgreSQL": "postgresql",
       "MongoDB": "mongodb",
       "SQLite": "sqlite",
       "Supabase": "supabase",
@@ -95,7 +100,9 @@
       "Postman": "postman",
       "Linux": "linux",
       "BullMQ": null,
-      "GitHub": "github"
+      "GitHub": "github",
+      "Coolify": "coolify",
+      "Drizzle ORM": "drizzle"
     }
   },
   "projects": [
@@ -134,6 +141,15 @@
       "impact": "Approval-gated daily summaries with Sheets-backed dedup",
       "stack": ["n8n", "Groq API", "GitHub API", "Telegram", "Gmail", "Google Sheets"],
       "href": "https://github.com/anandhakrishnan13/n8n"
+    },
+    {
+      "id": "005",
+      "name": "Speech-to-Text Workspace",
+      "role": "Solo Developer",
+      "action": "A real-time transcription platform routing audio across three engines: Groq Whisper, Google Gemini, and a self-hosted Whisper microservice (Whistle) containerised with Docker. Live audio streams over WebSockets, merging partial results into final transcripts and converting Indic scripts into readable Latin text. Includes transcript search, CRUD, and range-request audio playback.",
+      "impact": "82 integration tests across a Bun monorepo, 3 transcription engines",
+      "stack": ["Next.js", "Fastify", "Bun", "FastAPI", "PostgreSQL", "Drizzle ORM", "WebSockets"],
+      "href": "https://github.com/anandhakrishnan13/stt"
     }
   ],
   "experience": {

@@ -180,29 +180,30 @@
   }
 }
 
-@keyframes blink {
-  0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
-  100% {
-    opacity: 0;
-  }
+/* Sections participate in the focus effect driven by the scroll listener in routes/index.tsx. */
+@utility snap-section {
+  display: flex;
+  flex-direction: column;
+  transition:
+    filter 500ms ease,
+    opacity 500ms ease,
+    transform 500ms ease;
 }
 
-@utility caret {
-  display: inline-block;
-  width: 0.5ch;
-  height: 1em;
-  vertical-align: -0.15em;
-  margin-left: 2px;
-  background: var(--cyan);
-  animation: blink 1s steps(1) infinite;
+@utility blur-next {
+  filter: blur(6px) saturate(0.85);
+  opacity: 0.55;
+  transform: scale(0.985);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .caret {
-    animation: none;
+  .snap-section {
+    transition: none;
+  }
+
+  .blur-next {
+    filter: none;
+    opacity: 1;
+    transform: none;
   }
 }

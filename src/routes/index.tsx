@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, MotionConfig } from "motion/react";
 import {
@@ -12,14 +13,12 @@ import {
   Server,
   Wrench,
   Layers,
-  GitBranch,
   MapPin,
   Calendar,
   ExternalLink,
   Heart,
 } from "lucide-react";
 import { NavDock } from "@/components/nav-dock";
-import { Typewriter } from "@/components/typewriter";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -89,6 +88,45 @@ function SectionHeading({ section, className }: { section: Section; className?: 
 }
 
 function Index() {
+  useEffect(() => {
+    const ids = ["hero", "stack", "experience", "projects", "education", "volunteer", "contact"];
+    const els = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    if (!els.length) return;
+
+    const apply = () => {
+      // The section under the upper third of the viewport is the one being read;
+      // the last section wins at the bottom of the page, where it can never reach the pivot.
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      const pivot = window.scrollY + window.innerHeight * 0.35;
+      let activeIdx = atBottom ? els.length - 1 : 0;
+      if (!atBottom) {
+        for (let i = 0; i < els.length; i++) {
+          if (els[i].getBoundingClientRect().top + window.scrollY <= pivot) activeIdx = i;
+        }
+      }
+      const blurred = new Set<string>();
+      if (activeIdx >= 1) blurred.add(ids[activeIdx - 1]);
+      if (activeIdx < ids.length - 1) blurred.add(ids[activeIdx + 1]);
+      els.forEach((el) => el.classList.toggle("blur-next", blurred.has(el.id)));
+    };
+
+    // Sections change height as fonts and images load, so re-evaluate on layout changes too.
+    const observer = new ResizeObserver(apply);
+    observer.observe(document.body);
+
+    apply();
+    window.addEventListener("scroll", apply, { passive: true });
+    window.addEventListener("resize", apply);
+    window.addEventListener("load", apply);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", apply);
+      window.removeEventListener("resize", apply);
+      window.removeEventListener("load", apply);
+    };
+  }, []);
+
   return (
     <MotionConfig reducedMotion="user">
       <div className="relative">
@@ -112,92 +150,72 @@ function Index() {
 function Hero() {
   const hero = data.hero;
   return (
-    <section id="hero" className="relative px-6 py-18">
-      <div className="absolute inset-0" />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/40 to-transparent" />
-
-      <div className="relative mx-auto flex w-full max-w-6xl flex-col">
-        <div className="anim-rise">
+    <section id="hero" className="snap-section relative px-6 py-18">
+      <div className="relative mx-auto grid w-full max-w-6xl gap-10 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
+        <div className="min-w-0">
           <SectionLabel index="01" name={hero.sectionLabel} />
+
+          <div className="anim-rise mt-6 flex items-center gap-2">
+            <span className="size-2 rounded-full bg-term-green" />
+            <span className="font-meta text-muted-foreground">{hero.status}</span>
+          </div>
+
+          <h1
+            className="anim-rise mt-3 text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl"
+            style={{ animationDelay: "0.1s" }}
+          >
+            {hero.name}
+          </h1>
+
+          <p
+            className="anim-rise mt-3 text-lg font-medium text-cyan md:text-xl"
+            style={{ animationDelay: "0.2s" }}
+          >
+            {hero.role}
+          </p>
+
+          <p
+            className="anim-rise mt-5 max-w-2xl text-base text-muted-foreground"
+            style={{ animationDelay: "0.3s" }}
+          >
+            {hero.bio}
+          </p>
+
+          <div className="anim-rise mt-8 flex flex-wrap gap-3" style={{ animationDelay: "0.4s" }}>
+            <Button asChild className={ctaPrimary}>
+              <a
+                href="#projects"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                {hero.cta}
+                <ArrowUpRight className="size-4" />
+              </a>
+            </Button>
+            <Button asChild variant="outline" className={ctaSecondary}>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                {hero.contactCta}
+              </a>
+            </Button>
+          </div>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] md:items-start">
-          <div className="min-w-0">
-            <div
-              className="anim-left mb-6 inline-block overflow-hidden rounded-full border border-border p-1"
-              style={{ animationDelay: "0.4s" }}
-            >
-              <img
-                src={hero.photo}
-                alt={hero.photoAlt}
-                width={224}
-                height={224}
-                className="size-48 rounded-full object-cover md:size-56"
-              />
-            </div>
-
-            <h1
-              className="anim-rise mt-6 flex flex-wrap items-center gap-x-2 text-3xl font-bold leading-tight tracking-tight md:text-5xl"
-              style={{ animationDelay: "0.2s" }}
-            >
-              <span className="text-foreground">{hero.name}</span>
-            </h1>
-            <p
-              className="anim-rise mt-2 min-h-[1.5em] text-lg font-normal text-muted-foreground md:text-xl"
-              style={{ animationDelay: "0.5s" }}
-            >
-              <Typewriter words={[hero.role]} />
-            </p>
-
-            <p
-              className="anim-rise mt-6 max-w-xl text-left text-base text-muted-foreground md:text-lg"
-              style={{ animationDelay: "0.5s" }}
-            >
-              {hero.bio}
-            </p>
-          </div>
-
-          <div className="flex min-w-0 flex-col gap-6">
-            <div className="panel anim-right p-6" style={{ animationDelay: "0.4s" }}>
-              <dl className="space-y-4">
-                {[
-                  ["Focus", hero.profileFocus.join(" · ")],
-                  ["Experience", hero.experience],
-                  ["Shipped", hero.shipped],
-                ].map(([label, value]) => (
-                  <div key={label} className="flex flex-wrap items-baseline justify-between gap-2">
-                    <dt className="text-sm text-muted-foreground">{label}</dt>
-                    <dd className="text-sm font-medium text-foreground">{value}</dd>
-                  </div>
-                ))}
-              </dl>
-              <div className="mt-6 flex items-center gap-2 border-t border-border pt-4 text-sm text-foreground">
-                <span className="size-2 rounded-full bg-term-green" />
-                {hero.status}
-              </div>
-            </div>
-
-            <div className="anim-rise mt-4 flex flex-wrap gap-3" style={{ animationDelay: "0.9s" }}>
-              <Button asChild className={ctaPrimary}>
-                <a
-                  href="#projects"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                >
-                  {hero.cta}
-                  <ArrowUpRight className="size-4" />
-                </a>
-              </Button>
-              <Button asChild variant="outline" className={ctaSecondary}>
-                <a href={hero.linkedinUrl} target="_blank" rel="noreferrer">
-                  <Linkedin className="size-4" />
-                  {hero.linkedinLabel}
-                </a>
-              </Button>
-            </div>
-          </div>
+        <div className="anim-right order-first md:order-none" style={{ animationDelay: "0.2s" }}>
+          <img
+            src={hero.photo}
+            alt={hero.photoAlt}
+            width={256}
+            height={256}
+            className="size-40 rounded-full border border-border object-cover md:size-64"
+          />
         </div>
       </div>
     </section>
@@ -216,7 +234,7 @@ function Stack() {
     Infrastructure: Cloud,
   };
   return (
-    <section id="stack" className="relative px-6 py-18">
+    <section id="stack" className="snap-section relative px-6 py-18">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="02" name={section.sectionLabel} />
         <SectionHeading section={section} />
@@ -293,21 +311,11 @@ function Projects() {
   const projects = data.projects;
 
   return (
-    <section id="projects" className="relative px-6 py-18">
+    <section id="projects" className="snap-section relative px-6 py-18">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="04" name={section.sectionLabel} />
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
           <SectionHeading section={section} />
-          <a
-            href={section.githubUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="relative inline-flex items-center gap-2 text-xs text-muted-foreground transition before:absolute before:-inset-2 before:content-[''] hover:text-cyan"
-          >
-            <GitBranch className="size-3.5" />
-            {section.allReposLabel}
-            <ArrowUpRight className="size-3.5" />
-          </a>
         </div>
 
         <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -373,7 +381,7 @@ function Projects() {
 function Experience() {
   const section = data.sections.experience;
   return (
-    <section id="experience" className="relative px-6 py-18">
+    <section id="experience" className="snap-section relative px-6 py-18">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="03" name={section.sectionLabel} />
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
@@ -449,7 +457,7 @@ function Experience() {
 function Volunteer() {
   const section = data.sections.volunteer;
   return (
-    <section id="volunteer" className="relative px-6 py-18">
+    <section id="volunteer" className="snap-section relative px-6 py-18">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="06" name={section.sectionLabel} />
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
@@ -503,7 +511,7 @@ function Volunteer() {
 function Education() {
   const section = data.sections.education;
   return (
-    <section id="education" className="relative px-6 py-18">
+    <section id="education" className="snap-section relative px-6 py-18">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="05" name={section.sectionLabel} />
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
@@ -554,7 +562,7 @@ function Education() {
 function Contact() {
   const section = data.sections.contact;
   return (
-    <section id="contact" className="relative px-6 pt-18 pb-24">
+    <section id="contact" className="snap-section relative px-6 pt-18 pb-24">
       <div className="mx-auto flex w-full max-w-4xl flex-col text-center">
         <SectionLabel index="07" name={section.sectionLabel} />
 
@@ -583,12 +591,6 @@ function Contact() {
               <Github className="size-4" /> {section.githubLabel}
             </a>
           </Button>
-        </div>
-
-        <div className="mt-10 flex items-center justify-center gap-3 font-meta text-meta text-muted-foreground">
-          {section.features.map((f) => (
-            <span key={f}>{f}</span>
-          ))}
         </div>
 
         <div className="mt-6 text-center font-meta text-meta text-muted-foreground">

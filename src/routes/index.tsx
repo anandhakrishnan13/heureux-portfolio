@@ -19,6 +19,7 @@ import {
   Heart,
 } from "lucide-react";
 import { NavDock } from "@/components/nav-dock";
+import { SECTION_IDS, useActiveSection } from "@/hooks/use-active-section";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -88,49 +89,22 @@ function SectionHeading({ section, className }: { section: Section; className?: 
 }
 
 function Index() {
+  const active = useActiveSection();
+
+  // Only the active section stays sharp; its immediate neighbours blur.
   useEffect(() => {
-    const ids = ["hero", "stack", "experience", "projects", "education", "volunteer", "contact"];
-    const els = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
-    if (!els.length) return;
-
-    const apply = () => {
-      // The section under the upper third of the viewport is the one being read;
-      // the last section wins at the bottom of the page, where it can never reach the pivot.
-      const atBottom =
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-      const pivot = window.scrollY + window.innerHeight * 0.35;
-      let activeIdx = atBottom ? els.length - 1 : 0;
-      if (!atBottom) {
-        for (let i = 0; i < els.length; i++) {
-          if (els[i].getBoundingClientRect().top + window.scrollY <= pivot) activeIdx = i;
-        }
-      }
-      const blurred = new Set<string>();
-      if (activeIdx >= 1) blurred.add(ids[activeIdx - 1]);
-      if (activeIdx < ids.length - 1) blurred.add(ids[activeIdx + 1]);
-      els.forEach((el) => el.classList.toggle("blur-next", blurred.has(el.id)));
-    };
-
-    // Sections change height as fonts and images load, so re-evaluate on layout changes too.
-    const observer = new ResizeObserver(apply);
-    observer.observe(document.body);
-
-    apply();
-    window.addEventListener("scroll", apply, { passive: true });
-    window.addEventListener("resize", apply);
-    window.addEventListener("load", apply);
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", apply);
-      window.removeEventListener("resize", apply);
-      window.removeEventListener("load", apply);
-    };
-  }, []);
+    const activeIndex = SECTION_IDS.indexOf(active);
+    SECTION_IDS.forEach((id, index) => {
+      document
+        .getElementById(id)
+        ?.classList.toggle("blur-next", Math.abs(index - activeIndex) === 1);
+    });
+  }, [active]);
 
   return (
     <MotionConfig reducedMotion="user">
       <div className="relative">
-        <NavDock />
+        <NavDock active={active} />
         <main className="scroll-smooth">
           <Hero />
           <Stack />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Terminal,
   Boxes,
@@ -33,25 +33,8 @@ const items = [
   { id: "contact", label: "Contact", icon: Send },
 ];
 
-export function NavDock() {
-  const [active, setActive] = useState("hero");
+export function NavDock({ active }: { active: string }) {
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) setActive(e.target.id);
-        }
-      },
-      { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
-    );
-    items.forEach((i) => {
-      const el = document.getElementById(i.id);
-      if (el) obs.observe(el);
-    });
-    return () => obs.disconnect();
-  }, []);
 
   const go = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });

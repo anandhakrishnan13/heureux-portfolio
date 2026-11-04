@@ -7,7 +7,6 @@ import {
   Linkedin,
   Mail,
   Phone,
-  TrendingUp,
   Code2,
   Database,
   Cloud,
@@ -150,7 +149,7 @@ function Hero() {
           </p>
 
           <p
-            className="anim-rise mt-5 max-w-2xl text-balance text-left text-base text-muted-foreground"
+            className="anim-rise mt-5 max-w-2xl text-left hyphens-auto text-pretty [hyphenate-limit-chars:10_4_4] text-base text-muted-foreground md:text-justify"
             style={{ animationDelay: "0.3s" }}
           >
             {hero.bio}
@@ -285,12 +284,6 @@ function Projects() {
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {projects.map((p, i) => {
             const wide = i === projects.length - 1 && projects.length % 2 === 1;
-            const impactLine = (
-              <div className="flex items-center gap-2 text-xs text-term-green">
-                <TrendingUp className="size-3.5 shrink-0" />
-                {p.impact}
-              </div>
-            );
             const sourceLink = (
               <a
                 href={p.href}
@@ -328,8 +321,6 @@ function Projects() {
                     <p className="mt-4 text-left hyphens-auto text-pretty [hyphenate-limit-chars:10_4_4] md:text-justify text-sm text-muted-foreground">
                       {p.action}
                     </p>
-
-                    {!wide && <div className="mt-3">{impactLine}</div>}
                   </div>
 
                   <div
@@ -353,7 +344,6 @@ function Projects() {
                       </div>
                       {wide && sourceLink}
                     </div>
-                    {wide && <div className="flex flex-col items-start gap-2">{impactLine}</div>}
                   </div>
                 </div>
               </motion.article>

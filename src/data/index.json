@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Anandhakrishnan Nair \u00b7 Full Stack Developer",
+    "title": "Anandhakrishnan Nair · Full Stack Developer",
     "description": "Full Stack Developer building supply chain and CRM systems. Production experience with measurable impact."
   },
   "hero": {
@@ -110,7 +110,6 @@
       "id": "001",
       "name": "Load Balancer",
       "action": "A Layer-7 HTTP load balancer in Go spreading traffic across servers behind a single endpoint, with round-robin, least-connections, and latency-based power-of-two-choices routing driven by live in-flight counts and response times. Lock-free request path, active health checks, graceful shutdown, async SQLite logging, and a Next.js live dashboard. Tested with 600 requests against slow, fast, and 10%-failing mock servers.",
-      "impact": "Latency-based routing hit 1,932 req/s at 1.3ms median, 10x round-robin throughput",
       "stack": ["Go", "Next.js", "SQLite", "Docker Compose"],
       "href": "https://github.com/anandhakrishnan13"
     },
@@ -118,7 +117,6 @@
       "id": "002",
       "name": "Speech-to-Text Workspace",
       "action": "A real-time transcription platform routing audio across three engines: Groq Whisper, Google Gemini, and a self-hosted Whisper microservice (Whistle) containerised with Docker. Live audio streams over WebSockets, merging partial results into final transcripts and converting Indic scripts into readable Latin text. Includes transcript search, CRUD, and range-request audio playback.",
-      "impact": "82 integration tests across a Bun monorepo, 3 transcription engines",
       "stack": ["Next.js", "Fastify", "Bun", "FastAPI", "PostgreSQL", "Drizzle ORM", "WebSockets"],
       "href": "https://github.com/anandhakrishnan13/stt"
     },
@@ -126,7 +124,6 @@
       "id": "003",
       "name": "Smart Bookmark",
       "action": "A bookmark manager that syncs across your devices. Uses Google Gemini so you can search your bookmarks with plain English queries. Jina AI scrapes pages into clean text before indexing. Has collections, favourites, a trash bin with 30-day recovery, and Google OAuth for sign-in.",
-      "impact": "AI-powered semantic search with Google Gemini integration",
       "stack": ["Next.js", "Supabase", "Gemini API", "Jina AI", "TypeScript"],
       "href": "https://github.com/anandhakrishnan13"
     },
@@ -134,7 +131,6 @@
       "id": "004",
       "name": "GitHub Commit Report",
       "action": "Turns any GitHub user's commits into a plain-language daily summary with Groq. Skips already-reported commits via history in Google Sheets, routes the draft to Telegram for one-tap approval, and emails the confirmed version.",
-      "impact": "Approval-gated daily summaries with Sheets-backed dedup",
       "stack": ["n8n", "Groq API", "GitHub API", "Telegram", "Gmail", "Google Sheets"],
       "href": "https://github.com/anandhakrishnan13/n8n"
     },
@@ -142,7 +138,6 @@
       "id": "005",
       "name": "Academia",
       "action": "A student management app with three-tier role-based access across attendance, timetables, and exam results, backed by Node.js. Includes a progress dashboard, student profiles, and a notifications and events page surfacing updates to the right audience.",
-      "impact": "Three-tier RBAC serving admins, teachers, and students",
       "stack": ["Flutter", "Node.js", "Express.js", "SQLite", "REST APIs"],
       "href": "https://github.com/anandhakrishnan13/academia"
     }

@@ -51,10 +51,6 @@ export function NavDock({ active }: { active: string }) {
         className="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 md:block"
       >
         <div className="dock flex max-w-[calc(100vw-1.5rem)] items-center gap-1 overflow-x-auto rounded-lg p-1.5">
-          <div className="hidden items-center gap-2 border-r border-border/60 px-3 py-1.5 font-meta text-meta text-muted-foreground lg:flex">
-            <span className="size-1.5 rounded-full bg-term-green" />
-            <span className="whitespace-nowrap">Anandhakrishnan</span>
-          </div>
           {items.map((it, i) => {
             const Icon = it.icon;
             const isActive = active === it.id;

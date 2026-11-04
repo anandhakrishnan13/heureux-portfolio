@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Sheet,
@@ -88,20 +87,6 @@ export function NavDock({ active }: { active: string }) {
               </Tooltip>
             );
           })}
-          <Button
-            asChild
-            className="ml-1 hidden h-auto gap-2 rounded-md bg-cyan px-3 py-2 text-xs font-medium text-cyan-foreground transition hover:bg-cyan hover:brightness-110 xl:inline-flex"
-          >
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                go("contact");
-              }}
-            >
-              Hire me
-            </a>
-          </Button>
         </div>
       </nav>
 
@@ -113,20 +98,6 @@ export function NavDock({ active }: { active: string }) {
             <ActiveIcon className="size-3.5 shrink-0" strokeWidth={2} />
             <span className="truncate">{activeItem.label}</span>
           </span>
-          <Button
-            asChild
-            className="h-11 shrink-0 gap-2 rounded-md bg-cyan px-3 text-xs font-medium text-cyan-foreground hover:bg-cyan"
-          >
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                go("contact");
-              }}
-            >
-              Hire me
-            </a>
-          </Button>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button
@@ -174,21 +145,6 @@ export function NavDock({ active }: { active: string }) {
                   })}
                 </ul>
               </ScrollArea>
-              <Separator className="my-4 bg-border/60" />
-              <Button
-                asChild
-                className="h-12 w-full gap-2 rounded-lg bg-cyan text-sm font-medium text-cyan-foreground hover:bg-cyan"
-              >
-                <a
-                  href="#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    go("contact");
-                  }}
-                >
-                  Hire me
-                </a>
-              </Button>
             </SheetContent>
           </Sheet>
         </div>

@@ -7,7 +7,7 @@
     "sectionLabel": "Intro",
     "name": "Anandhakrishnan",
     "role": "Full Stack Developer",
-    "bio": "Building supply-chain systems: production planning, inventory, and vendor replenishment. Currently pursuing my MCA at Manipal.",
+    "bio": "I ship supply-chain software that runs daily operations across seven facilities. Lately most of my work is wiring LLMs into products: semantic search, real-time transcription, and automated reporting.",
     "status": "open to work",
     "cta": "View My Work",
     "photo": "/me.png",
@@ -19,13 +19,7 @@
       "sectionLabel": "Stack",
       "heading": "What I work with.",
       "highlight": "work with",
-      "subtitle": "Tools I use in production across supply-chain systems and web apps.",
-      "stats": {
-        "production exp": null,
-        "SKUs managed": "2,700+",
-        "orders / day": "1,000+",
-        "facilities live": "7"
-      }
+      "subtitle": "Tools I use in production across supply-chain systems and web apps."
     },
     "projects": {
       "sectionLabel": "Projects",
@@ -36,7 +30,13 @@
     "experience": {
       "sectionLabel": "Experience",
       "heading": "Production experience.",
-      "highlight": "experience"
+      "highlight": "experience",
+      "stats": {
+        "production exp": null,
+        "SKUs managed": "2,700+",
+        "orders / day": "1,000+",
+        "facilities live": "7"
+      }
     },
     "volunteer": {
       "sectionLabel": "Volunteer",

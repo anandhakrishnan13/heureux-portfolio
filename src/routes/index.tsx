@@ -150,7 +150,7 @@ function Hero() {
           </p>
 
           <p
-            className="anim-rise mt-5 max-w-2xl text-base text-muted-foreground"
+            className="anim-rise mt-5 max-w-2xl text-balance text-left text-base text-muted-foreground"
             style={{ animationDelay: "0.3s" }}
           >
             {hero.bio}
@@ -213,7 +213,9 @@ function Stack() {
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="02" name={section.sectionLabel} />
         <SectionHeading section={section} />
-        <p className="mt-2 max-w-md text-left text-sm text-muted-foreground">{section.subtitle}</p>
+        <p className="mt-2 max-w-lg text-balance text-left md:text-justify text-sm text-muted-foreground">
+          {section.subtitle}
+        </p>
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {(Object.keys(data.stack) as Array<keyof typeof data.stack>).map((layer, idx) => {
@@ -260,19 +262,6 @@ function Stack() {
               </motion.div>
             );
           })}
-        </div>
-
-        <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {Object.entries(section.stats).map(([label, key]) => (
-            <div key={label} className="rounded-lg border border-border bg-background/40 p-4">
-              <div className="text-2xl font-bold text-cyan">
-                {key === null ? getExperienceLabel() : key}
-              </div>
-              <div className="mt-1 text-left font-meta text-meta text-muted-foreground">
-                {label}
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -333,31 +322,36 @@ function Projects() {
                         <div className="font-meta text-meta text-cyan">{p.id}</div>
                         <h3 className="mt-2 text-2xl font-semibold">{p.name}</h3>
                       </div>
-                      {sourceLink}
+                      {!wide && sourceLink}
                     </div>
 
-                    <p className="mt-4 text-left text-sm text-muted-foreground">{p.action}</p>
+                    <p className="mt-4 text-left hyphens-auto text-pretty [hyphenate-limit-chars:10_4_4] md:text-justify text-sm text-muted-foreground">
+                      {p.action}
+                    </p>
 
-                    {!wide && <div className="mt-3 md:mb-5">{impactLine}</div>}
+                    {!wide && <div className="mt-3">{impactLine}</div>}
                   </div>
 
                   <div
                     className={
                       wide
-                        ? "mt-5 flex flex-col justify-between gap-6 md:mt-0 md:w-[320px] md:shrink-0 md:self-stretch md:border-l md:border-border/60 md:pl-8"
+                        ? "mt-5 flex flex-col justify-center gap-4 md:mt-0 md:w-[320px] md:shrink-0 md:self-stretch md:border-l md:border-border/60 md:pl-8"
                         : "mt-auto flex flex-wrap items-center gap-3 border-t border-border/60 pt-4"
                     }
                   >
-                    <div className="flex flex-wrap gap-1.5">
-                      {p.stack.map((s) => (
-                        <Badge
-                          key={s}
-                          variant="outline"
-                          className={`${tag} bg-background/60 text-muted-foreground`}
-                        >
-                          {s}
-                        </Badge>
-                      ))}
+                    <div className={wide ? "flex items-start justify-between gap-3" : "contents"}>
+                      <div className="flex flex-wrap gap-1.5">
+                        {p.stack.map((s) => (
+                          <Badge
+                            key={s}
+                            variant="outline"
+                            className={`${tag} bg-background/60 text-muted-foreground`}
+                          >
+                            {s}
+                          </Badge>
+                        ))}
+                      </div>
+                      {wide && sourceLink}
                     </div>
                     {wide && <div className="flex flex-col items-start gap-2">{impactLine}</div>}
                   </div>
@@ -383,8 +377,8 @@ function Experience() {
           <SectionHeading section={section} />
         </div>
 
-        <div className="mt-8 panel p-6">
-          <div className="flex flex-wrap items-start justify-between gap-4 border-b border-border/60 pb-4">
+        <div className="mt-8">
+          <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">
                 <img src="/flo.svg" alt="Flo Sleep Solutions" className="h-5 w-auto" />
@@ -409,37 +403,57 @@ function Experience() {
             </Badge>
           </div>
 
-          <div className="mt-6 columns-1 gap-5 md:columns-2">
-            {Object.entries(data.experience.projects).map(([name, proj]) => (
-              <div
-                key={name}
-                className="mb-5 break-inside-avoid rounded-lg border border-border/60 bg-background/40 p-5"
-              >
-                <h4 className="text-sm font-semibold text-cyan">{name}</h4>
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {proj.stack.map((s) => (
-                    <Badge
-                      key={s}
-                      variant="outline"
-                      className={`${tag} bg-background/60 text-muted-foreground`}
-                    >
-                      {s}
-                    </Badge>
-                  ))}
+          <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-4">
+            {Object.entries(section.stats).map(([label, key]) => (
+              <div key={label} className="rounded-lg border border-border bg-background/40 p-4">
+                <div className="text-2xl font-bold text-cyan">
+                  {key === null ? getExperienceLabel() : key}
                 </div>
-                <ul className="mt-4 space-y-2">
-                  {proj.highlights.map((h, i) => (
-                    <li
-                      key={i}
-                      className="flex gap-2 text-left text-xs leading-relaxed text-muted-foreground"
-                    >
-                      <span className="mt-1 size-1 shrink-0 rounded-full bg-cyan/60" />
-                      {h}
-                    </li>
-                  ))}
-                </ul>
+                <div className="mt-1 text-left font-meta text-meta text-muted-foreground">
+                  {label}
+                </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-6 grid gap-5 md:grid-cols-2">
+            {Object.entries(data.experience.projects).map(([name, proj], idx, all) => {
+              const wide = idx === 0 && all.length % 2 === 1;
+              return (
+                <div
+                  key={name}
+                  className={`rounded-lg border border-border/60 bg-background/40 p-5 ${
+                    wide ? "md:col-span-2" : ""
+                  }`}
+                >
+                  <h4 className="text-sm font-semibold text-cyan">{name}</h4>
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {proj.stack.map((s) => (
+                      <Badge
+                        key={s}
+                        variant="outline"
+                        className={`${tag} bg-background/60 text-muted-foreground`}
+                      >
+                        {s}
+                      </Badge>
+                    ))}
+                  </div>
+                  <ul className={wide ? "mt-4 md:columns-2 md:gap-x-8" : "mt-4 space-y-2"}>
+                    {proj.highlights.map((h, i) => (
+                      <li
+                        key={i}
+                        className={`flex gap-2 text-left hyphens-auto text-pretty [hyphenate-limit-chars:10_4_4] text-xs leading-relaxed text-muted-foreground md:text-justify ${
+                          wide ? "mb-2 break-inside-avoid" : ""
+                        }`}
+                      >
+                        <span className="mt-1 size-1 shrink-0 rounded-full bg-cyan/60" />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -484,7 +498,7 @@ function Volunteer() {
                     {v.highlights.map((h, j) => (
                       <li
                         key={j}
-                        className="flex gap-2 text-left text-xs leading-relaxed text-muted-foreground"
+                        className="flex gap-2 text-left hyphens-auto text-pretty [hyphenate-limit-chars:10_4_4] md:text-justify text-xs leading-relaxed text-muted-foreground"
                       >
                         <span className="mt-1 size-1 shrink-0 rounded-full bg-rose-500/60" />
                         {h}
@@ -569,7 +583,7 @@ function Contact() {
           <span className="text-cyan">{section.highlight}</span>
           {section.heading.replace(section.highlight, "")}
         </h2>
-        <p className="mx-auto mt-5 max-w-xl text-left text-base text-muted-foreground">
+        <p className="mx-auto mt-5 max-w-xl text-balance text-left md:text-justify text-base text-muted-foreground">
           {section.subtitle}
         </p>
 
@@ -595,10 +609,6 @@ function Contact() {
               <Github className="size-4" /> {section.githubLabel}
             </a>
           </Button>
-        </div>
-
-        <div className="mt-6 text-center font-meta text-meta text-muted-foreground">
-          &copy; {new Date().getFullYear()}
         </div>
       </div>
     </section>

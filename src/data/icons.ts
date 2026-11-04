@@ -17,6 +17,7 @@ import {
   SiDocker,
   SiGit,
   SiGithubactions,
+  SiGithub,
   SiPostman,
   SiLinux,
 } from "react-icons/si";
@@ -40,6 +41,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   docker: SiDocker,
   git: SiGit,
   githubactions: SiGithubactions,
+  github: SiGithub,
   postman: SiPostman,
   linux: SiLinux,
 };

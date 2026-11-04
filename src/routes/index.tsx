@@ -6,6 +6,7 @@ import {
   Github,
   Linkedin,
   Mail,
+  Phone,
   TrendingUp,
   Code2,
   Database,
@@ -520,6 +521,10 @@ function Education() {
                       <Calendar className="size-3" />
                       {edu.period}
                     </span>
+                    <span className="flex items-center gap-1 text-muted-foreground">
+                      <MapPin className="size-3" />
+                      {edu.location}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -553,6 +558,11 @@ function Contact() {
             <a href={`mailto:${section.email}`}>
               <Mail className="size-4" />
               {section.email}
+            </a>
+          </Button>
+          <Button asChild variant="outline" className={ctaSecondary}>
+            <a href={section.phoneHref}>
+              <Phone className="size-4" /> {section.phoneLabel}
             </a>
           </Button>
           <Button asChild variant="outline" className={ctaSecondary}>

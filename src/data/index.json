@@ -7,7 +7,7 @@
     "sectionLabel": "init.session",
     "name": "Anandhakrishnan",
     "role": "Full Stack Developer",
-    "bio": "I build supply chain and CRM systems. Shipped an ERP used across 7 facilities handling over a thousand orders a day, with live inventory tracking and auto-replenishment for 2,000+ products. Pursuing my MCA at Manipal and volunteering on the side.",
+    "bio": "Full-Stack Developer with 1+ year of experience engineering supply-chain systems — production planning, inventory, and vendor replenishment across 7 facilities processing 1,000+ orders a day across 2,700+ SKUs. Pursuing my MCA at Manipal.",
     "profileFocus": [
       "full-stack",
       "web apps"
@@ -16,15 +16,15 @@
     "shipped": "9 production systems",
     "target": "independent ownership",
     "gitLog": {
-      "a4f12c1": "feat: automated supply chain replenishment (2K+ SKUs)",
+      "a4f12c1": "feat: automated supply chain replenishment (2,700+ SKUs)",
       "9b22e80": "feat: supply chain workflow automation",
-      "3e1d4aa": "feat: achieved 100% inventory accuracy via QR tracking"
+      "3e1d4aa": "feat: qr-based inventory tracking with uuid labels"
     },
     "status": "open to work",
     "cta": "View My Work",
     "photo": "/me.png",
     "photoAlt": "Anandhakrishnan Nair",
-    "linkedinUrl": "https://linkedin.com/in/anandhakrishnan13",
+    "linkedinUrl": "https://www.linkedin.com/in/anandmn",
     "linkedinLabel": "LinkedIn"
   },
   "sections": {
@@ -32,12 +32,12 @@
       "sectionLabel": "stack.manifest",
       "heading": "What I work with.",
       "highlight": "work with",
-      "subtitle": "Tools I actually use in production across MERN and Next.js apps.",
+      "subtitle": "Tools I use in production across supply-chain systems and web apps.",
       "stats": {
         "production exp": null,
-        "SKUs managed": "2,000+",
-        "raw materials per SKU": "20+",
-        "inventory accuracy": "100%"
+        "SKUs managed": "2,700+",
+        "orders / day": "1,000+",
+        "facilities live": "7"
       }
     },
     "projects": {
@@ -75,7 +75,7 @@
         "open to remote"
       ],
       "email": "anandhakrishnannair13@gmail.com",
-      "linkedinUrl": "https://linkedin.com/in/anandhakrishnan13",
+      "linkedinUrl": "https://www.linkedin.com/in/anandmn",
       "linkedinLabel": "LinkedIn",
       "githubUrl": "https://github.com/anandhakrishnan13",
       "githubLabel": "GitHub"
@@ -87,34 +87,52 @@
       "React": "react",
       "Next.js": "nextjs",
       "TypeScript": "typescript",
+      "JavaScript": "javascript",
       "Tailwind CSS": "tailwindcss",
-      "Redux Toolkit": "redux",
-      "Shadcn": "shadcn"
+      "Shadcn": "shadcn",
+      "HTML": "html5"
     },
     "Backend": {
       "Node.js": "nodejs",
       "Express.js": "express",
       "Bun": "bun",
-      "PostgreSQL": "postgresql",
-      "MongoDB": "mongodb",
-      "Redis": "redis",
-      "MySQL": "mysql",
-      "BullMQ": null,
-      "WebSockets": null
+      "Go": "go",
+      "REST APIs": null,
+      "JWT / OAuth": null,
+      "Microservices": null
     },
-    "Infrastructure": {
-      "Docker": "docker",
+    "Data": {
+      "MongoDB": "mongodb",
+      "SQLite": "sqlite",
       "Supabase": "supabase",
+      "Redis": "redis"
+    },
+    "Tools": {
+      "Docker": "docker",
       "Git": "git",
+      "GitHub Actions": "githubactions",
+      "Postman": "postman",
       "Linux": "linux",
-      "Google Gemini": "googlegemini",
-      "OAuth": null,
-      "REST APIs": null
+      "BullMQ": null
     }
   },
   "projects": [
     {
       "id": "001",
+      "name": "Load Balancer",
+      "role": "Solo Developer",
+      "action": "A Layer-7 HTTP load balancer in Go spreading traffic across servers behind a single endpoint, with round-robin, least-connections, and latency-based power-of-two-choices routing driven by live in-flight counts and response times. Lock-free request path, active health checks, graceful shutdown, async SQLite logging, and a Next.js live dashboard.",
+      "impact": "Latency-based routing hit 1,932 req/s at 1.3ms median vs 182 req/s for round-robin — ~10x throughput",
+      "stack": [
+        "Go",
+        "Next.js",
+        "SQLite",
+        "Docker Compose"
+      ],
+      "href": "https://github.com/anandhakrishnan13"
+    },
+    {
+      "id": "002",
       "name": "Smart Bookmark",
       "role": "Solo Developer",
       "action": "A bookmark manager that syncs across your devices. Uses Google Gemini so you can search your bookmarks with plain English queries. Jina AI scrapes pages into clean text before indexing. Has collections, favourites, and a trash bin with 30-day recovery.",
@@ -129,11 +147,11 @@
       "href": "https://github.com/anandhakrishnan13"
     },
     {
-      "id": "002",
+      "id": "003",
       "name": "Academia",
       "role": "Full Stack Developer",
-      "action": "A student management system with separate portals for admins, teachers, and students. Handles attendance, timetables, and results through a Flutter frontend backed by Node.js.",
-      "impact": "Serves admins, teachers, and students through role-based portals",
+      "action": "A student management app with three-tier role-based access across attendance, timetables, and exam results, backed by Node.js. Includes a progress dashboard, student profiles, and a notifications and events page surfacing updates to the right audience.",
+      "impact": "Three-tier RBAC serving admins, teachers, and students",
       "stack": [
         "Flutter",
         "Node.js",
@@ -144,89 +162,64 @@
       "href": "https://github.com/anandhakrishnan13/academia"
     },
     {
-      "id": "005",
-      "name": "Daily Task Report",
+      "id": "004",
+      "name": "GitHub Commit Report",
       "role": "Solo Developer",
-      "action": "A fully-automated n8n workflow that pulls your daily GitHub commits, turns them into a clean task report via Groq (LLaMA), sends it to Telegram for a yes/no/regenerate approval, and emails it once approved. Tracks reported commit SHAs in Google Sheets so it never repeats itself.",
-      "impact": "Scheduled daily at 8:30 PM with an LLM-generated, approval-gated report flow",
+      "action": "Turns any GitHub user's commits into a plain-language daily summary with Groq. Skips already-reported commits via history in Google Sheets, routes the draft to Telegram for one-tap approval, and emails the confirmed version.",
+      "impact": "Approval-gated daily summaries with Sheets-backed dedup",
       "stack": [
         "n8n",
         "Groq API",
         "GitHub API",
         "Telegram",
+        "Gmail",
         "Google Sheets"
       ],
       "href": "https://github.com/anandhakrishnan13/n8n"
-    },
-    {
-      "id": "003",
-      "name": "E-Commerce Admin Panel",
-      "role": "Full Stack Developer",
-      "action": "Built a full-featured admin dashboard for product, order, and inventory management.",
-      "impact": "Reduced manual operations by 60% with centralized management",
-      "stack": [
-        "React.js",
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-        "Tailwind CSS"
-      ],
-      "href": "https://github.com/anandhakrishnan13",
-      "archived": true
-    },
-    {
-      "id": "004",
-      "name": "Job Portal",
-      "role": "Full Stack Developer",
-      "action": "Developed a dual-role job listing and application platform with smart filtering.",
-      "impact": "Connected 200+ employers with candidates through smart filtering",
-      "stack": [
-        "React.js",
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-        "REST APIs"
-      ],
-      "href": "https://github.com/anandhakrishnan13/jobportal",
-      "archived": true
     }
   ],
   "experience": {
-    "company": "Flo Sleep Solutions Pvt Ltd",
+    "company": "Flo Mattress",
     "role": "Full Stack Developer",
     "location": "Andheri, Mumbai",
     "period": "August 2025 - Present",
     "projects": {
-      "Flo-Bridge CRM": {
-        "stack": [
-          "MongoDB",
-          "Express.js",
-          "React.js",
-          "Node.js",
-          "Shadcn"
-        ],
-        "highlights": [
-          "Built a MERN application for supply chain operations. Used daily across 7 facilities by teams handling inventory, planning, and logistics.",
-          "Built an inventory management system achieving 100% accuracy through QR-based inward entry. Tracks raw materials at unit level, logging consumption automatically. For example, scanning a 150m fabric roll and logging the remaining 100m after cutting 50m eliminates stockouts and manual reconciliation.",
-          "Developed a production planning module handling 3-4 daily batches of 250-400 orders per batch across 4 facilities. Synced from Unicommerce in real time, organized by marketplace, escalation level, and Shopify channel, each sorted by fulfilment TAT to prioritise urgent orders.",
-          "Automated MRP label generation and raw material lists by batch grouping 200-400+ orders across 4 production facilities, replacing manual planning and cutting preparation time for production runs."
-        ]
-      },
-      "Flo-Bridge 2.0": {
+      "Production Plan": {
         "stack": [
           "Next.js",
           "Express.js",
-          "BullMQ",
+          "MongoDB",
+          "BullMQ"
+        ],
+        "highlights": [
+          "Supports operations across 7 facilities processing 1,000+ orders daily across 2,700+ SKUs, secured with JWT authentication and action-, facility-, and role-based access controls.",
+          "Prioritises daily orders with escalated orders ranked first, assigns them across facilities, and generates serial and batch numbers for batches of 300-500 orders — tracking each through work-in-progress, vacuum completion, and dispatch.",
+          "Generates batch-specific MRP labels with QC markings for the production floor, flagging escalated orders for priority handling and repeat quality checks; BOM-based foam allocation suggestions plus scrap tracking keep raw-material use traceable.",
+          "Gates QC and dispatch on production state — only work-in-progress orders enter QC, only vacuum-complete orders dispatch — with cancellation, shipper-weight, and shipper-allocation checks cutting wasted dispatches."
+        ]
+      },
+      "Inventory Management": {
+        "stack": [
+          "React.js",
+          "Express.js",
+          "MongoDB",
+          "Shadcn"
+        ],
+        "highlights": [
+          "Batch-based Goods Receipt Notes (GRNs) with QR-scan driven raw-material consumption and UUID-based QR label generation.",
+          "BullMQ workers sync Unicommerce inventory and log per-order raw-material consumption from Bills of Materials; a Production Plan trigger ingests eligible mattress orders and updates changed ones."
+        ]
+      },
+      "Vendor Replenishment & Vendor App": {
+        "stack": [
+          "Next.js",
+          "Express.js",
           "MongoDB",
           "Tailwind CSS"
         ],
         "highlights": [
-          "Moved to microservices with Next.js, bringing Planning, QC, Picklist, and Dispatch into one data model. Cut MongoDB load and cleaned up duplicate logic across 7 facilities.",
-          "Built an automated QC-to-Picklist pipeline with multi-stage quality checks tracking raw material consumption per order. Auto-marks orders as packed in Unicommerce, then scans MRP labels to batch and mark them Ready-to-Ship, eliminating manual RTS and factory-level inaccuracies.",
-          "Built BullMQ workers for automated daily order ingestion from Unicommerce, order escalation triggers, consumption scanning to track raw material usage per order, and automatic order swapping to matching SKU or measurement on cancellation.",
-          "Developed a Replenishment module syncing 2,000+ SKUs across 3 third-party logistics facilities via a daily Unicommerce API worker. Teams can set buffer levels, minimum order quantities, and vendor preferences per product to plan their restocking.",
-          "Built an analytics dashboard with 90-day SKU health graphs across 6 stock levels and a facility heatmap tracking day-to-day inventory trends across 3 third-party logistics facilities.",
-          "Auto-suggests reorders when stock hits 66% of the buffer level and the quantity meets the minimum order. Tells you whether a product is slow because nobody wants it or because you have too much from a vendor."
+          "Vendor Replenishment plus a standalone Vendor App supporting inward processing with QR labels.",
+          "3PL warehouse stock dashboard with trend graphs, norm-based out-of-stock and over-limit flags, vendor activity tracking, and automatic reordering at Minimum Order Quantity (MOQ) — helping reduce stock-outs."
         ]
       }
     }
@@ -235,8 +228,8 @@
     {
       "school": "Manipal University Jaipur",
       "degree": "Master of Computer Applications (MCA)",
-      "score": "SGPA: 8.70",
-      "period": "2024 - Present"
+      "score": "CGPA: 8.79",
+      "period": "2024 - 2026"
     },
     {
       "school": "Keraleeya Samajam's Model College, Dombivli",

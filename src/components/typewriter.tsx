@@ -1,34 +1,49 @@
 import { useEffect, useState } from "react";
 
-export function Typewriter({ words, className }: { words: string[]; className?: string }) {
-  const [i, setI] = useState(0);
-  const [text, setText] = useState("");
-  const [del, setDel] = useState(false);
+/**
+ * Types `words` out sequentially, holding each completed phrase.
+ * A single word types once and stays put — no delete/retype churn.
+ */
+export function Typewriter({
+  words,
+  className,
+  speed = 70,
+  hold = 2200,
+}: {
+  words: string[];
+  className?: string;
+  speed?: number;
+  hold?: number;
+}) {
+  const [index, setIndex] = useState(0);
+  const [length, setLength] = useState(0);
+
+  const word = words[index % words.length] ?? "";
+  const complete = length >= word.length;
 
   useEffect(() => {
-    const current = words[i % words.length];
-    const speed = del ? 40 : 70;
-    const t = setTimeout(() => {
-      if (!del) {
-        const next = current.slice(0, text.length + 1);
-        setText(next);
-        if (next === current) setTimeout(() => setDel(true), 1400);
-      } else {
-        const next = current.slice(0, text.length - 1);
-        setText(next);
-        if (next === "") {
-          setDel(false);
-          setI((v) => v + 1);
+    if (complete && words.length === 1) return;
+    const t = setTimeout(
+      () => {
+        if (complete) {
+          setIndex((v) => (v + 1) % words.length);
+          setLength(0);
+        } else {
+          setLength((v) => v + 1);
         }
-      }
-    }, speed);
+      },
+      complete ? hold : speed,
+    );
     return () => clearTimeout(t);
-  }, [text, del, i, words]);
+  }, [complete, length, words.length, speed, hold]);
 
   return (
     <span className={className}>
-      {text}
-      <span className="caret" />
+      <span className="sr-only">{words.join(" ")}</span>
+      <span aria-hidden="true">
+        {word.slice(0, length)}
+        <span className="caret" />
+      </span>
     </span>
   );
 }

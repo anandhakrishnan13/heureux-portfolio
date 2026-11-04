@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
 import { motion } from "motion/react";
 import {
   ArrowUpRight,
@@ -12,6 +11,8 @@ import {
   Code2,
   Database,
   Cloud,
+  Server,
+  Wrench,
   Layers,
   GitBranch,
   ChevronRight,
@@ -22,6 +23,10 @@ import {
 } from "lucide-react";
 import { NavDock } from "@/components/nav-dock";
 import { Typewriter } from "@/components/typewriter";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 import data from "@/data/index.json";
 import iconMap from "@/data/icons";
@@ -45,6 +50,15 @@ type Section = {
   highlight: string;
 };
 
+/* Shared class recipes for the shadcn primitives used across sections. */
+const ctaPrimary =
+  "h-auto gap-2 rounded-lg bg-cyan px-5 py-3 font-mono-display text-sm font-medium text-cyan-foreground shadow-glow-cta transition hover:bg-cyan hover:brightness-110";
+const ctaSecondary =
+  "h-auto gap-2 rounded-lg border-border bg-surface/60 px-5 py-3 font-mono-display text-sm font-normal text-foreground shadow-none transition hover:border-cyan/40 hover:bg-surface/60 hover:text-cyan";
+const chip = "border-0 px-3 py-1.5 font-mono-display text-xs font-normal ring-1 ring-border";
+const tag =
+  "border-0 px-2 py-1 font-meta text-[length:var(--text-tag)] font-normal ring-1 ring-border";
+
 function getExperienceLabel(): string {
   const start = new Date("2025-08-01");
   const now = new Date();
@@ -60,7 +74,7 @@ function SectionLabel({ index, name }: { index: string; name: string }) {
   return (
     <div className="flex items-center gap-3 font-meta text-meta text-muted-foreground">
       <span className="text-cyan">{index}</span>
-      <span className="h-px w-8 bg-border" />
+      <Separator className="h-px w-8 bg-border" />
       <span>{name}</span>
     </div>
   );
@@ -69,7 +83,7 @@ function SectionLabel({ index, name }: { index: string; name: string }) {
 function SectionHeading({ section, className }: { section: Section; className?: string }) {
   const parts = section.heading.split(section.highlight);
   return (
-    <h2 className={className ?? "font-mono-display text-4xl font-bold tracking-tight md:text-5xl"}>
+    <h2 className={className ?? "font-mono-display text-3xl font-bold tracking-tight md:text-5xl"}>
       {parts[0]}
       <span className="text-cyan">{section.highlight}</span>
       {parts[1]}
@@ -87,33 +101,6 @@ function Line({ p, cmd }: { p: string; cmd: string }) {
 }
 
 function Index() {
-  useEffect(() => {
-    const ids = ["hero", "stack", "experience", "projects", "education", "volunteer", "contact"];
-    const els = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
-
-    const apply = () => {
-      const mid = window.innerHeight * 0.5;
-      let activeIdx = 0;
-      for (let i = 0; i < els.length; i++) {
-        const r = els[i].getBoundingClientRect();
-        if (r.top <= mid && r.bottom > mid) {
-          activeIdx = i;
-          break;
-        }
-      }
-      const blurred = new Set<string>();
-      if (activeIdx >= 1) blurred.add(ids[activeIdx - 1]);
-      if (activeIdx < ids.length - 1) blurred.add(ids[activeIdx + 1]);
-      els.forEach((el) => {
-        el.classList.toggle("blur-next", blurred.has(el.id));
-      });
-    };
-
-    apply();
-    window.addEventListener("scroll", apply, { passive: true });
-    return () => window.removeEventListener("scroll", apply);
-  }, []);
-
   return (
     <div className="relative">
       <NavDock />
@@ -135,67 +122,57 @@ function Index() {
 function Hero() {
   const hero = data.hero;
   return (
-    <section id="hero" className="snap-section relative px-6 py-18">
+    <section id="hero" className="relative px-6 py-18">
       <div className="absolute inset-0 grid-bg" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/40 to-transparent" />
 
       <div className="relative mx-auto flex w-full max-w-6xl flex-col">
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="anim-rise">
           <SectionLabel index="01" name={hero.sectionLabel} />
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-hero md:items-start">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4, duration: 0.7 }}
-              className="card-glow mb-6 inline-block overflow-hidden rounded-full p-1"
+        <div className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] md:items-start">
+          <div className="min-w-0">
+            <div
+              className="card-glow anim-left mb-6 inline-block overflow-hidden rounded-full p-1"
+              style={{ animationDelay: "0.4s" }}
             >
               <img
                 src={hero.photo}
                 alt={hero.photoAlt}
+                width={224}
+                height={224}
                 className="size-48 rounded-full object-cover md:size-56"
               />
-            </motion.div>
+            </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.7 }}
-              className="mt-6 flex min-h-[1.5em] items-center gap-2 font-mono-display text-4xl font-bold leading-tight tracking-tight md:text-6xl"
+            <h1
+              className="anim-rise mt-6 flex flex-wrap items-center gap-x-2 font-mono-display text-3xl font-bold leading-tight tracking-tight md:text-5xl"
+              style={{ animationDelay: "0.2s" }}
             >
-              <span className="text-muted-foreground text-2xl md:text-4xl">$ </span>
-              <Typewriter
-                className="text-foreground"
-                words={[hero.name]}
-              />
-            </motion.h1>
-            <p className="mt-2 font-mono-display text-lg font-normal text-muted-foreground md:text-xl">
-              {hero.role}
+              <span className="text-2xl text-muted-foreground md:text-4xl">$</span>
+              <span className="text-foreground">{hero.name}</span>
+            </h1>
+            <p
+              className="anim-rise mt-2 min-h-[1.5em] font-mono-display text-lg font-normal text-muted-foreground md:text-xl"
+              style={{ animationDelay: "0.5s" }}
+            >
+              <Typewriter words={[hero.role]} />
             </p>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mt-6 max-w-xl text-justify text-base text-muted-foreground md:text-lg"
+            <p
+              className="anim-rise mt-6 max-w-xl text-left text-base text-muted-foreground sm:text-justify md:text-lg"
+              style={{ animationDelay: "0.5s" }}
             >
               {hero.bio}
-            </motion.p>
+            </p>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.7 }}
-            className="flex flex-col gap-6"
-          >
-            <div className="card-glow scanline overflow-hidden">
+          <div className="flex min-w-0 flex-col gap-6">
+            <div
+              className="card-glow scanline anim-right overflow-hidden"
+              style={{ animationDelay: "0.4s" }}
+            >
               <div className="flex items-center justify-between border-b border-border/60 bg-surface-2/60 px-4 py-2.5">
                 <div className="flex items-center gap-1.5">
                   <span className="size-2.5 rounded-full bg-destructive/70" />
@@ -206,7 +183,7 @@ function Hero() {
               </div>
               <div className="space-y-2.5 p-5 font-mono-display text-terminal leading-relaxed">
                 <Line p="$" cmd="cat profile.json" />
-                <pre className="rounded-md bg-background/60 p-3 text-xs text-foreground/90">
+                <pre className="overflow-x-auto rounded-md bg-background/60 p-3 text-xs whitespace-pre-wrap break-words text-foreground/90">
                   {JSON.stringify(
                     {
                       focus: hero.profileFocus,
@@ -234,34 +211,27 @@ function Hero() {
               </div>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 }}
-              className="mt-4 flex flex-wrap gap-3"
-            >
-              <a
-                href="#projects"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="inline-flex items-center gap-2 rounded-lg bg-cyan px-5 py-3 font-mono-display text-sm font-medium text-cyan-foreground shadow-glow-cta transition hover:brightness-110"
-              >
-                {hero.cta}
-                <ArrowUpRight className="size-4" />
-              </a>
-              <a
-                href={hero.linkedinUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface/60 px-5 py-3 font-mono-display text-sm text-foreground transition hover:border-cyan/40 hover:text-cyan"
-              >
-                <Linkedin className="size-4" />
-                {hero.linkedinLabel}
-              </a>
-            </motion.div>
-          </motion.div>
+            <div className="anim-rise mt-4 flex flex-wrap gap-3" style={{ animationDelay: "0.9s" }}>
+              <Button asChild className={ctaPrimary}>
+                <a
+                  href="#projects"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
+                  {hero.cta}
+                  <ArrowUpRight className="size-4" />
+                </a>
+              </Button>
+              <Button asChild variant="outline" className={ctaSecondary}>
+                <a href={hero.linkedinUrl} target="_blank" rel="noreferrer">
+                  <Linkedin className="size-4" />
+                  {hero.linkedinLabel}
+                </a>
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -272,23 +242,25 @@ function Hero() {
 
 function Stack() {
   const section = data.sections.stack;
-  const icons = {
+  const layerIcons: Record<string, typeof Code2> = {
     Frontend: Code2,
-    Backend: Database,
+    Backend: Server,
+    Data: Database,
+    Tools: Wrench,
     Infrastructure: Cloud,
-  } as const;
+  };
   return (
-    <section id="stack" className="snap-section relative px-6 py-18">
+    <section id="stack" className="relative px-6 py-18">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="02" name={section.sectionLabel} />
         <SectionHeading section={section} />
-        <p className="mt-2 max-w-md text-justify text-sm text-muted-foreground">
+        <p className="mt-2 max-w-md text-left text-sm text-muted-foreground sm:text-justify">
           {section.subtitle}
         </p>
 
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {(Object.keys(data.stack) as Array<keyof typeof data.stack>).map((layer, idx) => {
-            const Icon = icons[layer];
+            const Icon = layerIcons[layer] ?? Layers;
             return (
               <motion.div
                 key={layer}
@@ -317,13 +289,14 @@ function Stack() {
                   {Object.entries(data.stack[layer]).map(([name, icon]) => {
                     const SkillIcon = icon ? iconMap[icon] : null;
                     return (
-                      <span
+                      <Badge
                         key={name}
-                        className="inline-flex items-center gap-1.5 rounded-md bg-background/60 px-3 py-1.5 font-mono-display text-xs text-foreground ring-1 ring-border"
+                        variant="outline"
+                        className={`${chip} gap-1.5 bg-background/60 text-foreground`}
                       >
                         {SkillIcon && <SkillIcon className="size-4" />}
                         {name}
-                      </span>
+                      </Badge>
                     );
                   })}
                 </div>
@@ -338,7 +311,7 @@ function Stack() {
               <div className="font-mono-display text-2xl font-bold text-cyan">
                 {key === null ? getExperienceLabel() : key}
               </div>
-              <div className="mt-1 text-justify font-meta text-meta text-muted-foreground">
+              <div className="mt-1 text-left font-meta text-meta text-muted-foreground sm:text-justify">
                 {label}
               </div>
             </div>
@@ -353,11 +326,10 @@ function Stack() {
 
 function Projects() {
   const section = data.sections.projects;
-  const activeProjects = data.projects.filter((p) => !p.archived);
-  const archivedProjects = data.projects.filter((p) => p.archived);
+  const projects = data.projects;
 
   return (
-    <section id="projects" className="snap-section relative px-6 py-18">
+    <section id="projects" className="relative px-6 py-18">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="04" name={section.sectionLabel} />
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
@@ -366,7 +338,7 @@ function Projects() {
             href={section.githubUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 font-mono-display text-xs text-muted-foreground hover:text-cyan transition"
+            className="relative inline-flex items-center gap-2 font-mono-display text-xs text-muted-foreground transition before:absolute before:-inset-2 before:content-[''] hover:text-cyan"
           >
             <GitBranch className="size-3.5" />
             {section.allReposLabel}
@@ -375,49 +347,52 @@ function Projects() {
         </div>
 
         <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {activeProjects.map((p, i) => (
+          {projects.map((p, i) => (
             <motion.article
               key={p.id}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: i * 0.06 }}
-              className="card-glow card-glow-hover group relative p-6"
+              className="card-glow card-glow-hover group relative flex flex-col p-6"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-2 font-meta text-meta text-muted-foreground">
                     <span className="text-cyan">{p.id}</span>
-                    <span className="h-px w-4 bg-border" />
+                    <Separator className="h-px w-4 bg-border" />
                     <span>{p.role}</span>
                   </div>
                   <h3 className="mt-2 font-mono-display text-2xl font-semibold">{p.name}</h3>
                 </div>
               </div>
 
-              <p className="mt-4 text-justify text-sm text-muted-foreground">{p.action}</p>
+              <p className="mt-4 text-left text-sm text-muted-foreground sm:text-justify">
+                {p.action}
+              </p>
 
-              <div className="mt-4 flex items-center gap-2 font-mono-display text-xs text-term-green">
+              <div className="mb-5 flex items-center gap-2 font-mono-display text-xs text-term-green">
                 <TrendingUp className="size-3.5 shrink-0" />
                 {p.impact}
               </div>
 
-              <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border/60 pt-4">
+              <div className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-border/60 pt-4">
                 <div className="flex flex-wrap gap-1.5">
                   {p.stack.map((s) => (
-                    <span
+                    <Badge
                       key={s}
-                      className="rounded-md bg-background/60 px-2 py-1 font-meta text-tag text-muted-foreground ring-1 ring-border"
+                      variant="outline"
+                      className={`${tag} bg-background/60 text-muted-foreground`}
                     >
                       {s}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
                 <a
                   href={p.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 font-mono-display text-xs text-cyan opacity-0 transition group-hover:opacity-100"
+                  className="relative inline-flex items-center gap-1 font-mono-display text-xs text-muted-foreground transition before:absolute before:-inset-2 before:content-[''] hover:text-cyan"
                 >
                   {section.sourceLabel}
                   <ArrowUpRight className="size-3.5" />
@@ -436,7 +411,7 @@ function Projects() {
 function Experience() {
   const section = data.sections.experience;
   return (
-    <section id="experience" className="snap-section relative px-6 py-18">
+    <section id="experience" className="relative px-6 py-18">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="03" name={section.sectionLabel} />
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
@@ -463,9 +438,12 @@ function Experience() {
                 </span>
               </div>
             </div>
-            <span className="rounded-md border border-cyan/30 bg-cyan/5 px-3 py-1.5 font-mono-display text-xs text-cyan">
+            <Badge
+              variant="outline"
+              className="border border-cyan/30 bg-cyan/5 px-3 py-1.5 font-mono-display text-xs font-normal text-cyan"
+            >
               {data.experience.role}
-            </span>
+            </Badge>
           </div>
 
           <div className="mt-6 grid gap-5 md:grid-cols-2">
@@ -474,19 +452,20 @@ function Experience() {
                 <h4 className="font-mono-display text-sm font-semibold text-cyan">{name}</h4>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {proj.stack.map((s) => (
-                    <span
+                    <Badge
                       key={s}
-                      className="rounded-md bg-background/60 px-2 py-1 font-meta text-tag text-muted-foreground ring-1 ring-border"
+                      variant="outline"
+                      className={`${tag} bg-background/60 text-muted-foreground`}
                     >
                       {s}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
                 <ul className="mt-4 space-y-2">
                   {proj.highlights.map((h, i) => (
                     <li
                       key={i}
-                      className="flex gap-2 text-justify text-xs text-muted-foreground leading-relaxed"
+                      className="flex gap-2 text-left text-xs leading-relaxed text-muted-foreground sm:text-justify"
                     >
                       <span className="mt-1 size-1 shrink-0 rounded-full bg-cyan/60" />
                       {h}
@@ -507,7 +486,7 @@ function Experience() {
 function Volunteer() {
   const section = data.sections.volunteer;
   return (
-    <section id="volunteer" className="snap-section relative px-6 py-18">
+    <section id="volunteer" className="relative px-6 py-18">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="06" name={section.sectionLabel} />
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
@@ -530,7 +509,9 @@ function Volunteer() {
                 </div>
                 <div className="min-w-0">
                   <h3 className="font-mono-display text-base font-semibold">{v.organization}</h3>
-                  <p className="mt-1 text-justify text-sm text-muted-foreground">{v.role}</p>
+                  <p className="mt-1 text-left text-sm text-muted-foreground sm:text-justify">
+                    {v.role}
+                  </p>
                   <span className="mt-2 inline-flex items-center gap-1 text-xs text-muted-foreground">
                     <Calendar className="size-3" />
                     {v.period}
@@ -539,7 +520,7 @@ function Volunteer() {
                     {v.highlights.map((h, j) => (
                       <li
                         key={j}
-                        className="flex gap-2 text-justify text-xs text-muted-foreground leading-relaxed"
+                        className="flex gap-2 text-left text-xs leading-relaxed text-muted-foreground sm:text-justify"
                       >
                         <span className="mt-1 size-1 shrink-0 rounded-full bg-rose-500/60" />
                         {h}
@@ -561,7 +542,7 @@ function Volunteer() {
 function Education() {
   const section = data.sections.education;
   return (
-    <section id="education" className="snap-section relative px-6 py-18">
+    <section id="education" className="relative px-6 py-18">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="05" name={section.sectionLabel} />
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
@@ -584,11 +565,16 @@ function Education() {
                 </div>
                 <div className="min-w-0">
                   <h3 className="font-mono-display text-base font-semibold">{edu.school}</h3>
-                  <p className="mt-1 text-justify text-sm text-muted-foreground">{edu.degree}</p>
+                  <p className="mt-1 text-left text-sm text-muted-foreground sm:text-justify">
+                    {edu.degree}
+                  </p>
                   <div className="mt-3 flex flex-wrap items-center gap-3 text-xs">
-                    <span className="rounded-md border border-term-green/30 bg-term-green/5 px-2 py-1 font-mono-display text-term-green">
+                    <Badge
+                      variant="outline"
+                      className="border border-term-green/30 bg-term-green/5 px-2 py-1 font-mono-display text-[length:var(--text-tag)] font-normal text-term-green"
+                    >
                       {edu.score}
-                    </span>
+                    </Badge>
                     <span className="flex items-center gap-1 text-muted-foreground">
                       <Calendar className="size-3" />
                       {edu.period}
@@ -609,15 +595,15 @@ function Education() {
 function Contact() {
   const section = data.sections.contact;
   return (
-    <section id="contact" className="snap-section relative px-6 py-18">
+    <section id="contact" className="relative px-6 pt-18 pb-24">
       <div className="mx-auto flex w-full max-w-4xl flex-col text-center">
         <SectionLabel index="07" name={section.sectionLabel} />
 
-        <h2 className="mt-8 font-mono-display text-5xl font-bold tracking-tight md:text-6xl">
+        <h2 className="mt-8 font-mono-display text-4xl font-bold tracking-tight md:text-6xl">
           <span className="text-cyan">{section.highlight}</span>
           {section.heading.replace(section.highlight, "")}
         </h2>
-        <p className="mx-auto mt-5 max-w-xl text-justify text-base text-muted-foreground">
+        <p className="mx-auto mt-5 max-w-xl text-left text-base text-muted-foreground sm:text-justify">
           {section.subtitle}
         </p>
 
@@ -639,35 +625,28 @@ function Contact() {
         </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <a
-            href={`mailto:${section.email}`}
-            className="inline-flex items-center gap-2 rounded-lg bg-cyan px-5 py-3 font-mono-display text-sm font-medium text-cyan-foreground shadow-glow-cta transition hover:brightness-110"
-          >
-            <Mail className="size-4" />
-            {section.email}
-          </a>
-          <a
-            href={section.linkedinUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-background/40 px-4 py-3 font-mono-display text-sm hover:border-cyan/40 hover:text-cyan transition"
-          >
-            <Linkedin className="size-4" /> {section.linkedinLabel}
-          </a>
-          <a
-            href={section.githubUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-background/40 px-4 py-3 font-mono-display text-sm hover:border-cyan/40 hover:text-cyan transition"
-          >
-            <Github className="size-4" /> {section.githubLabel}
-          </a>
+          <Button asChild className={ctaPrimary}>
+            <a href={`mailto:${section.email}`}>
+              <Mail className="size-4" />
+              {section.email}
+            </a>
+          </Button>
+          <Button asChild variant="outline" className={ctaSecondary}>
+            <a href={section.linkedinUrl} target="_blank" rel="noreferrer">
+              <Linkedin className="size-4" /> {section.linkedinLabel}
+            </a>
+          </Button>
+          <Button asChild variant="outline" className={ctaSecondary}>
+            <a href={section.githubUrl} target="_blank" rel="noreferrer">
+              <Github className="size-4" /> {section.githubLabel}
+            </a>
+          </Button>
         </div>
 
         <div className="mt-16 flex items-center justify-center gap-3 font-meta text-meta text-muted-foreground">
           <Zap className="size-3 text-cyan" />
           <span>{data.footer}</span>
-          <span className="h-px w-8 bg-border" />
+          <Separator className="h-px w-8 bg-border" />
           <Cpu className="size-3" />
           <span>&copy; {new Date().getFullYear()}</span>
         </div>

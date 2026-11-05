@@ -90,7 +90,7 @@ export function NavDock({ active }: { active: string }) {
       <nav aria-label="Sections" className="fixed inset-x-3 bottom-4 z-50 md:hidden">
         <div className="dock flex items-center gap-1 rounded-lg p-1.5">
           <span className="flex min-w-0 flex-1 items-center gap-2 px-2.5 font-meta text-meta text-muted-foreground">
-            <span className="size-1.5 shrink-0 rounded-full bg-term-green" />
+            <span className="size-1.5 shrink-0 rounded-full bg-cyan" />
             <ActiveIcon className="size-3.5 shrink-0" strokeWidth={2} />
             <span className="truncate">{activeItem.label}</span>
           </span>

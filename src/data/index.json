@@ -8,7 +8,6 @@
     "name": "Anandhakrishnan",
     "role": "Full Stack Developer",
     "bio": "I ship supply-chain software that runs daily operations across seven facilities. Lately most of my work is wiring LLMs into products: semantic search, real-time transcription, and automated reporting.",
-    "status": "open to work",
     "cta": "View My Work",
     "photo": "/me.png",
     "photoAlt": "Anandhakrishnan Nair",
@@ -17,42 +16,42 @@
   "sections": {
     "stack": {
       "sectionLabel": "Stack",
-      "heading": "What I work with.",
-      "highlight": "work with",
-      "subtitle": "Tools I use in production across supply-chain systems and web apps."
+      "heading": "Skills & Stack",
+      "highlight": "Stack",
+      "subtitle": "Languages, frameworks, databases, and tools I use in production."
     },
     "projects": {
       "sectionLabel": "Projects",
-      "heading": "Personal works.",
-      "highlight": "works",
+      "heading": "Projects",
+      "highlight": "Projects",
       "sourceLabel": "source"
     },
     "experience": {
       "sectionLabel": "Experience",
-      "heading": "Production experience.",
-      "highlight": "experience",
+      "heading": "Work Experience",
+      "highlight": "Experience",
       "stats": {
         "production exp": null,
         "SKUs managed": "2,700+",
-        "orders / day": "1,000+",
+        "orders / day": "1.7k+",
         "facilities live": "7"
       }
     },
     "volunteer": {
       "sectionLabel": "Volunteer",
-      "heading": "Community.",
-      "highlight": "Community"
+      "heading": "Community & Volunteer",
+      "highlight": "Volunteer"
     },
     "education": {
       "sectionLabel": "Education",
-      "heading": "Academic background.",
-      "highlight": "background"
+      "heading": "Education",
+      "highlight": "Education"
     },
     "contact": {
       "sectionLabel": "Contact",
-      "heading": "Start a conversation.",
-      "highlight": "Start a conversation",
-      "subtitle": "Looking for full-time work and interesting projects. Let's talk.",
+      "heading": "Contact",
+      "highlight": "Contact",
+      "subtitle": "Available for full-time software engineering roles and interesting projects. Let's talk.",
       "email": "anandhakrishnannair13@gmail.com",
       "linkedinUrl": "https://www.linkedin.com/in/anandmn",
       "linkedinLabel": "LinkedIn",
@@ -83,7 +82,8 @@
       "FastAPI": "fastapi",
       "Fastify": "fastify",
       "Python": "python",
-      "WebSockets": "radio"
+      "WebSockets": "radio",
+      "BullMQ": "queue"
     },
     "Data": {
       "PostgreSQL": "postgresql",
@@ -91,7 +91,7 @@
       "SQLite": "sqlite",
       "Supabase": "supabase",
       "Redis": "redis",
-      "SQL": "database"
+      "Drizzle ORM": "drizzle"
     },
     "Tools": {
       "Docker": "docker",
@@ -99,10 +99,8 @@
       "GitHub Actions": "githubactions",
       "Postman": "postman",
       "Linux": "linux",
-      "BullMQ": "queue",
       "GitHub": "github",
-      "Coolify": "coolify",
-      "Drizzle ORM": "drizzle"
+      "Coolify": "coolify"
     }
   },
   "projects": [
@@ -111,7 +109,7 @@
       "name": "Load Balancer",
       "action": "A Layer-7 HTTP load balancer in Go spreading traffic across servers behind a single endpoint, with round-robin, least-connections, and latency-based power-of-two-choices routing driven by live in-flight counts and response times. Lock-free request path, active health checks, graceful shutdown, async SQLite logging, and a Next.js live dashboard. Tested with 600 requests against slow, fast, and 10%-failing mock servers.",
       "stack": ["Go", "Next.js", "SQLite", "Docker Compose"],
-      "href": "https://github.com/anandhakrishnan13"
+      "href": "https://github.com/anandhakrishnan13/go-loadbalancer"
     },
     {
       "id": "002",
@@ -125,7 +123,7 @@
       "name": "Smart Bookmark",
       "action": "A bookmark manager that syncs across your devices. Uses Google Gemini so you can search your bookmarks with plain English queries. Jina AI scrapes pages into clean text before indexing. Has collections, favourites, a trash bin with 30-day recovery, and Google OAuth for sign-in.",
       "stack": ["Next.js", "Supabase", "Gemini API", "Jina AI", "TypeScript"],
-      "href": "https://github.com/anandhakrishnan13"
+      "href": "https://github.com/anandhakrishnan13/bookmark"
     },
     {
       "id": "004",
@@ -151,24 +149,24 @@
       "Production Plan": {
         "stack": ["Next.js", "Express.js", "MongoDB", "BullMQ"],
         "highlights": [
-          "Led end-to-end development of the Production Plan, collaborating with supply chain, technology, and finance teams across 7 facilities processing 1,000+ orders daily across 2,700+ SKUs. Secured with JWT authentication and action-, facility-, and role-based access controls.",
-          "Prioritises daily orders with escalated orders ranked first, assigns them across facilities, and generates serial and batch numbers for batches of 300-500 orders, tracking each through work-in-progress, vacuum completion, and dispatch.",
-          "Generates batch-specific MRP labels with QC markings for the production floor, flagging escalated orders for priority handling and repeat quality checks; BOM-based foam allocation suggestions plus scrap tracking keep raw-material use traceable.",
-          "Gates QC and dispatch on production state: only work-in-progress orders enter QC, only vacuum-complete orders dispatch; cancellation, shipper-weight, and shipper-allocation checks cutting wasted dispatches."
+          "Led end-to-end development of the Production Plan across 7 facilities, processing 1.7k+ daily orders across 2,700+ SKUs with JWT authentication and role-based access controls.",
+          "Engineered order prioritisation, batch allocation (300–500 orders), and lifecycle tracking across work-in-progress, vacuum completion, and dispatch.",
+          "Automated batch-specific MRP label generation with QC markings, foam allocation suggestions based on BOMs, and scrap tracking for raw-material traceability.",
+          "Integrated QC and dispatch state validation to prevent wasted dispatches, implementing cancellation, shipper-weight, and shipper-allocation checks."
         ]
       },
       "Inventory Management": {
         "stack": ["React.js", "Express.js", "MongoDB", "Shadcn"],
         "highlights": [
-          "Batch-based Goods Receipt Notes (GRNs) with QR-scan driven raw-material consumption and UUID-based QR label generation.",
-          "BullMQ workers sync Unicommerce inventory and log per-order raw-material consumption from Bills of Materials; a Production Plan trigger ingests eligible mattress orders and updates changed ones."
+          "Built manufacturing inventory workflows for batch-based Goods Receipt Notes (GRNs) and QR-scan raw-material consumption with UUID-based QR label generation.",
+          "Engineered BullMQ background workers to synchronise Unicommerce inventory and calculate per-order raw-material consumption from BOMs."
         ]
       },
       "Vendor Replenishment & Vendor App": {
         "stack": ["Next.js", "Express.js", "MongoDB", "Tailwind CSS"],
         "highlights": [
-          "Vendor Replenishment plus a standalone Vendor App supporting inward processing with QR labels.",
-          "3PL warehouse stock dashboard with trend graphs, norm-based out-of-stock and over-limit flags, vendor activity tracking, and automatic reordering at Minimum Order Quantity (MOQ), helping reduce stock-outs."
+          "Developed Vendor Replenishment workflows and a standalone Vendor App supporting inward processing with QR labels.",
+          "Created a 3PL warehouse stock dashboard with trend analysis, automated MOQ reordering, and norm-based stock-out alerts."
         ]
       }
     }

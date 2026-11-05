@@ -15,8 +15,8 @@ import {
   Layers,
   MapPin,
   Calendar,
-  ExternalLink,
   Heart,
+  GraduationCap,
 } from "lucide-react";
 import { NavDock } from "@/components/nav-dock";
 import { SECTION_IDS, useActiveSection } from "@/hooks/use-active-section";
@@ -129,13 +129,8 @@ function Hero() {
         <div className="min-w-0">
           <SectionLabel index="01" name={hero.sectionLabel} />
 
-          <div className="anim-rise mt-6 flex items-center gap-2">
-            <span className="size-2 rounded-full bg-term-green" />
-            <span className="font-meta text-muted-foreground">{hero.status}</span>
-          </div>
-
           <h1
-            className="anim-rise mt-3 text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl"
+            className="anim-rise mt-6 text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl"
             style={{ animationDelay: "0.1s" }}
           >
             {hero.name}
@@ -228,19 +223,14 @@ function Stack() {
                 transition={{ delay: idx * 0.08 }}
                 className="panel panel-hover p-6"
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="grid size-9 place-items-center rounded-md bg-cyan/10 text-cyan ring-1 ring-cyan/30">
-                      <Icon className="size-4" />
-                    </div>
-                    <div>
-                      <div className="font-meta text-meta text-muted-foreground">
-                        layer.0{idx + 1}
-                      </div>
-                      <div className="text-base font-semibold">{layer}</div>
-                    </div>
+                <div className="flex items-center gap-3">
+                  <div className="grid size-9 place-items-center rounded-md bg-cyan/10 text-cyan ring-1 ring-cyan/30">
+                    <Icon className="size-4" />
                   </div>
-                  <Layers className="size-4 text-muted-foreground" />
+                  <div>
+                    <div className="font-meta text-meta text-muted-foreground">0{idx + 1}</div>
+                    <div className="text-base font-semibold">{layer}</div>
+                  </div>
                 </div>
 
                 <div className="mt-6 grid grid-cols-2 gap-2 md:grid-cols-3">
@@ -318,7 +308,7 @@ function Projects() {
                       {!wide && sourceLink}
                     </div>
 
-                    <p className="mt-4 text-left hyphens-auto text-pretty [hyphenate-limit-chars:10_4_4] md:text-justify text-sm text-muted-foreground">
+                    <p className="mt-4 text-left hyphens-auto text-pretty [hyphenate-limit-chars:10_4_4] text-sm text-muted-foreground">
                       {p.action}
                     </p>
                   </div>
@@ -370,8 +360,10 @@ function Experience() {
         <div className="mt-8">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2">
-                <img src="/flo.svg" alt="Flo Sleep Solutions" className="h-5 w-auto" />
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-7 items-center rounded bg-white px-2 py-0.5">
+                  <img src="/flo.svg" alt="Flo Mattress" className="h-4 w-auto" />
+                </div>
                 <h3 className="text-xl font-semibold">{data.experience.company}</h3>
               </div>
               <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
@@ -474,7 +466,7 @@ function Volunteer() {
               className="panel panel-hover p-6"
             >
               <div className="flex items-start gap-3">
-                <div className="grid size-9 shrink-0 place-items-center rounded-md bg-rose-500/10 text-rose-500 ring-1 ring-rose-500/30">
+                <div className="grid size-9 shrink-0 place-items-center rounded-md bg-cyan/10 text-cyan ring-1 ring-cyan/30">
                   <Heart className="size-4" />
                 </div>
                 <div className="min-w-0">
@@ -488,9 +480,9 @@ function Volunteer() {
                     {v.highlights.map((h, j) => (
                       <li
                         key={j}
-                        className="flex gap-2 text-left hyphens-auto text-pretty [hyphenate-limit-chars:10_4_4] md:text-justify text-xs leading-relaxed text-muted-foreground"
+                        className="flex gap-2 text-left hyphens-auto text-pretty [hyphenate-limit-chars:10_4_4] text-xs leading-relaxed text-muted-foreground"
                       >
-                        <span className="mt-1 size-1 shrink-0 rounded-full bg-rose-500/60" />
+                        <span className="mt-1 size-1 shrink-0 rounded-full bg-cyan/60" />
                         {h}
                       </li>
                     ))}
@@ -528,8 +520,8 @@ function Education() {
               className="panel panel-hover p-6"
             >
               <div className="flex items-start gap-3">
-                <div className="grid size-9 shrink-0 place-items-center rounded-md bg-term-green/10 text-term-green ring-1 ring-term-green/30">
-                  <ExternalLink className="size-4" />
+                <div className="grid size-9 shrink-0 place-items-center rounded-md bg-cyan/10 text-cyan ring-1 ring-cyan/30">
+                  <GraduationCap className="size-4" />
                 </div>
                 <div className="min-w-0">
                   <h3 className="text-base font-semibold">{edu.school}</h3>
@@ -537,7 +529,7 @@ function Education() {
                   <div className="mt-3 flex flex-wrap items-center gap-3 text-xs">
                     <Badge
                       variant="outline"
-                      className="border border-term-green/30 bg-term-green/5 px-2 py-1 text-[length:var(--text-tag)] font-normal text-term-green"
+                      className="border border-border/60 bg-background/60 px-2 py-1 text-[length:var(--text-tag)] font-normal text-muted-foreground"
                     >
                       {edu.score}
                     </Badge>
@@ -570,14 +562,15 @@ function Contact() {
         <SectionLabel index="07" name={section.sectionLabel} />
 
         <h2 className="mt-8 text-4xl font-bold tracking-tight md:text-6xl">
+          {section.heading.split(section.highlight)[0]}
           <span className="text-cyan">{section.highlight}</span>
-          {section.heading.replace(section.highlight, "")}
+          {section.heading.split(section.highlight)[1]}
         </h2>
-        <p className="mx-auto mt-5 max-w-xl text-balance text-left md:text-justify text-base text-muted-foreground">
+        <p className="mx-auto mt-5 max-w-xl text-balance text-center text-base text-muted-foreground">
           {section.subtitle}
         </p>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <div className="mx-auto mt-8 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-center gap-3 max-w-md sm:max-w-none">
           <Button asChild className={ctaPrimary}>
             <a href={`mailto:${section.email}`}>
               <Mail className="size-4" />

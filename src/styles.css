@@ -34,7 +34,6 @@
   --color-ring: var(--ring);
   --color-cyan: var(--cyan);
   --color-cyan-foreground: var(--cyan-foreground);
-  --color-term-green: var(--term-green);
 
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -69,7 +68,6 @@
 
   --cyan: oklch(0.86 0.18 200);
   --cyan-foreground: oklch(0.14 0.02 260);
-  --term-green: oklch(0.84 0.22 145);
 }
 
 .dark {

@@ -33,3 +33,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# is-a.dev registry records (submitted to is-a-dev/register, not part of this site)
+heureux.json
+_vercel.heureux.json

@@ -77,13 +77,13 @@
       "Express.js": "express",
       "Bun": "bun",
       "Go": "go",
-      "REST APIs": null,
-      "JWT / OAuth": null,
-      "Microservices": null,
+      "REST APIs": "webhook",
+      "JWT / OAuth": "key",
+      "Microservices": "network",
       "FastAPI": "fastapi",
       "Fastify": "fastify",
       "Python": "python",
-      "WebSockets": null
+      "WebSockets": "radio"
     },
     "Data": {
       "PostgreSQL": "postgresql",
@@ -91,7 +91,7 @@
       "SQLite": "sqlite",
       "Supabase": "supabase",
       "Redis": "redis",
-      "SQL": null
+      "SQL": "database"
     },
     "Tools": {
       "Docker": "docker",
@@ -99,7 +99,7 @@
       "GitHub Actions": "githubactions",
       "Postman": "postman",
       "Linux": "linux",
-      "BullMQ": null,
+      "BullMQ": "queue",
       "GitHub": "github",
       "Coolify": "coolify",
       "Drizzle ORM": "drizzle"

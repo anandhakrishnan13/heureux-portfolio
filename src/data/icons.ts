@@ -27,6 +27,7 @@ import {
   SiPostman,
   SiLinux,
 } from "react-icons/si";
+import { Database, KeyRound, ListOrdered, Network, Radio, Webhook } from "lucide-react";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   react: SiReact,
@@ -56,6 +57,12 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   drizzle: SiDrizzle,
   postman: SiPostman,
   linux: SiLinux,
+  webhook: Webhook,
+  key: KeyRound,
+  network: Network,
+  radio: Radio,
+  database: Database,
+  queue: ListOrdered,
 };
 
 export default iconMap;

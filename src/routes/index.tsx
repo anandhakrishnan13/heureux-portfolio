@@ -216,7 +216,7 @@ function Stack() {
           {section.subtitle}
         </p>
 
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-8 grid gap-5 lg:grid-cols-2">
           {(Object.keys(data.stack) as Array<keyof typeof data.stack>).map((layer, idx) => {
             const Icon = layerIcons[layer] ?? Layers;
             return (
@@ -243,16 +243,16 @@ function Stack() {
                   <Layers className="size-4 text-muted-foreground" />
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-2">
+                <div className="mt-6 grid grid-cols-2 gap-2 md:grid-cols-3">
                   {Object.entries(data.stack[layer]).map(([name, icon]) => {
                     const SkillIcon = icon ? iconMap[icon] : null;
                     return (
                       <Badge
                         key={name}
                         variant="outline"
-                        className={`${chip} gap-1.5 bg-background/60 text-foreground`}
+                        className={`${chip} w-full justify-start gap-2 bg-background/60 text-foreground`}
                       >
-                        {SkillIcon && <SkillIcon className="size-4" />}
+                        {SkillIcon ? <SkillIcon className="size-4" /> : <span className="size-4" />}
                         {name}
                       </Badge>
                     );

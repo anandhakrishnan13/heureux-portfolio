@@ -184,14 +184,12 @@
   flex-direction: column;
   transition:
     filter 500ms ease,
-    opacity 500ms ease,
-    transform 500ms ease;
+    opacity 500ms ease;
 }
 
 @utility blur-next {
   filter: blur(6px) saturate(0.85);
   opacity: 0.55;
-  transform: scale(0.985);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -202,6 +200,5 @@
   .blur-next {
     filter: none;
     opacity: 1;
-    transform: none;
   }
 }

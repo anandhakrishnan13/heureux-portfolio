@@ -558,7 +558,7 @@ function Contact() {
   const section = data.sections.contact;
   return (
     <section id="contact" className="snap-section relative px-6 pt-18 pb-24">
-      <div className="mx-auto flex w-full max-w-4xl flex-col text-center">
+      <div className="mx-auto flex w-full max-w-6xl flex-col text-center">
         <SectionLabel index="07" name={section.sectionLabel} />
 
         <h2 className="mt-8 text-4xl font-bold tracking-tight md:text-6xl">

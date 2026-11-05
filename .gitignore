@@ -34,6 +34,11 @@ dist-ssr
 *.sln
 *.sw?
 
-# is-a.dev registry records (submitted to is-a-dev/register, not part of this site)
+# Local-only: is-a.dev registry records (live in is-a-dev/register, not this site)
 heureux.json
 _vercel.heureux.json
+
+# Local-only: resume sources (kept out of the site repo)
+AnandhakrishnanResume.tex
+TechResume.tex
+TechResume.pdf

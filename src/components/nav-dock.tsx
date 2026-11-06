@@ -48,7 +48,7 @@ export function NavDock({ active }: { active: string }) {
       {/* Wide viewports: unchanged floating dock, with real tooltips on hover. */}
       <nav
         aria-label="Sections"
-        className="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 md:block"
+        className="fixed bottom-6 left-[calc(50%+var(--resume-w,0px)/2)] z-50 hidden -translate-x-1/2 transition-[left] duration-300 ease-out md:block"
       >
         <div className="dock flex max-w-[calc(100vw-1.5rem)] items-center gap-1 overflow-x-auto rounded-lg p-1.5">
           {items.map((it, i) => {

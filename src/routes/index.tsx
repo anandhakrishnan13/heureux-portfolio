@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, MotionConfig } from "motion/react";
 import {
@@ -21,6 +21,7 @@ import {
   Download,
 } from "lucide-react";
 import { NavDock } from "@/components/nav-dock";
+import { ResumePanel } from "@/components/resume-panel";
 import { SECTION_IDS, useActiveSection } from "@/hooks/use-active-section";
 
 import { Badge } from "@/components/ui/badge";
@@ -90,8 +91,11 @@ function SectionHeading({ section, className }: { section: Section; className?: 
   );
 }
 
+const RESUME_WIDTH = "clamp(400px, 40vw, 620px)";
+
 function Index() {
   const active = useActiveSection();
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   // Only the active section stays sharp; its immediate neighbours blur.
   useEffect(() => {
@@ -105,10 +109,14 @@ function Index() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="relative">
+      <div
+        className="relative"
+        style={{ "--resume-w": resumeOpen ? RESUME_WIDTH : "0px" } as CSSProperties}
+      >
+        <ResumePanel open={resumeOpen} onClose={() => setResumeOpen(false)} />
         <NavDock active={active} />
-        <main className="scroll-smooth">
-          <Hero />
+        <main className="scroll-smooth transition-[margin] duration-300 ease-out md:ml-[var(--resume-w)]">
+          <Hero resumeOpen={resumeOpen} onToggleResume={() => setResumeOpen((v) => !v)} />
           <Stack />
           <Experience />
           <Projects />
@@ -123,7 +131,7 @@ function Index() {
 
 /* -------------------- HERO -------------------- */
 
-function Hero() {
+function Hero({ resumeOpen, onToggleResume }: { resumeOpen: boolean; onToggleResume: () => void }) {
   const hero = data.hero;
   return (
     <section id="hero" className="snap-section relative px-6 py-18">
@@ -146,7 +154,7 @@ function Hero() {
           </p>
 
           <p
-            className="anim-rise mt-5 max-w-2xl text-left hyphens-auto text-pretty [hyphenate-limit-chars:10_4_4] text-base text-muted-foreground md:text-justify"
+            className="anim-rise mt-5 max-w-2xl text-left hyphens-auto text-pretty [hyphenate-limit-chars:10_4_4] text-base text-muted-foreground"
             style={{ animationDelay: "0.3s" }}
           >
             {hero.bio}
@@ -176,11 +184,15 @@ function Hero() {
                 {hero.contactCta}
               </a>
             </Button>
-            <Button asChild variant="outline" className={ctaSecondary}>
-              <a href="/resume" target="_blank" rel="noreferrer">
-                <FileText className="size-4" />
-                View resume
-              </a>
+            <Button
+              type="button"
+              variant="outline"
+              className={ctaSecondary}
+              onClick={onToggleResume}
+              aria-expanded={resumeOpen}
+            >
+              <FileText className="size-4" />
+              View resume
             </Button>
             <Button asChild variant="outline" className={ctaSecondary}>
               <a href="/resume.pdf" download>
@@ -221,7 +233,7 @@ function Stack() {
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <SectionLabel index="02" name={section.sectionLabel} />
         <SectionHeading section={section} />
-        <p className="mt-2 max-w-lg text-balance text-left md:text-justify text-sm text-muted-foreground">
+        <p className="mt-2 max-w-lg text-balance text-left text-sm text-muted-foreground">
           {section.subtitle}
         </p>
 
@@ -438,7 +450,7 @@ function Experience() {
                     {proj.highlights.map((h, i) => (
                       <li
                         key={i}
-                        className={`flex gap-2 text-left hyphens-auto text-pretty [hyphenate-limit-chars:10_4_4] text-xs leading-relaxed text-muted-foreground md:text-justify ${
+                        className={`flex gap-2 text-left hyphens-auto text-pretty [hyphenate-limit-chars:10_4_4] text-xs leading-relaxed text-muted-foreground ${
                           wide ? "mb-2 break-inside-avoid" : ""
                         }`}
                       >

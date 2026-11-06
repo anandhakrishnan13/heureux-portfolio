@@ -202,3 +202,30 @@
     opacity: 1;
   }
 }
+
+@media print {
+  /* Vertical page margins only: Chrome lays print content out at paper width, so
+     horizontal in-page margins would overflow and clip the right edge. */
+  @page {
+    size: A4;
+    margin: 14mm 0;
+  }
+
+  html,
+  body {
+    width: auto;
+    background: #fff;
+    color: #111;
+    overflow: visible;
+  }
+
+  /* Chrome lays print content out at the paper width, not at the printable box,
+     so horizontal margins live here as A4 padding (14mm each side) while the
+     generator only supplies the vertical page margins. */
+  .resume-doc {
+    width: auto !important;
+    max-width: none !important;
+    margin-inline: 0 !important;
+    padding-inline: 14mm !important;
+  }
+}

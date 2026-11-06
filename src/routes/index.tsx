@@ -17,6 +17,8 @@ import {
   Calendar,
   Heart,
   GraduationCap,
+  FileText,
+  Download,
 } from "lucide-react";
 import { NavDock } from "@/components/nav-dock";
 import { SECTION_IDS, useActiveSection } from "@/hooks/use-active-section";
@@ -172,6 +174,18 @@ function Hero() {
                 }}
               >
                 {hero.contactCta}
+              </a>
+            </Button>
+            <Button asChild variant="outline" className={ctaSecondary}>
+              <a href="/resume" target="_blank" rel="noreferrer">
+                <FileText className="size-4" />
+                View resume
+              </a>
+            </Button>
+            <Button asChild variant="outline" className={ctaSecondary}>
+              <a href="/resume.pdf" download>
+                <Download className="size-4" />
+                Download resume
               </a>
             </Button>
           </div>

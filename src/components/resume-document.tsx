@@ -3,73 +3,64 @@ import data from "@/data/index.json";
 const contact = data.sections.contact;
 const experience = data.experience;
 
+const contactLinks = [
+  { label: contact.email, href: `mailto:${contact.email}` },
+  { label: contact.phoneLabel, href: contact.phoneHref },
+  { label: contact.linkedinLabel, href: contact.linkedinUrl, external: true },
+  { label: contact.githubLabel, href: contact.githubUrl, external: true },
+  { label: experience.location, href: null },
+];
+
 export function ResumeDocument({ className = "" }: { className?: string }) {
   return (
-    <article className={`resume-doc ${className}`}>
-      <header className="border-b border-neutral-300 pb-4">
-        <h1 className="text-3xl font-bold tracking-tight">{data.hero.name}</h1>
-        <p className="mt-1 text-sm font-medium text-neutral-700">{data.hero.role}</p>
-        <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-neutral-600">
-          <li>
-            <a href={`mailto:${contact.email}`} className="hover:text-neutral-900 hover:underline">
-              {contact.email}
-            </a>
-          </li>
-          <li>
-            <a href={contact.phoneHref} className="hover:text-neutral-900 hover:underline">
-              {contact.phoneLabel}
-            </a>
-          </li>
-          <li>
-            <a
-              href={contact.linkedinUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-neutral-900 hover:underline"
-            >
-              {contact.linkedinLabel}
-            </a>
-          </li>
-          <li>
-            <a
-              href={contact.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-neutral-900 hover:underline"
-            >
-              {contact.githubLabel}
-            </a>
-          </li>
-          <li>{experience.location}</li>
+    <article className={`resume-doc text-[13px] leading-[1.65] text-neutral-700 ${className}`}>
+      <header>
+        <h1 className="text-[27px] leading-tight font-bold tracking-tight text-neutral-900">
+          {data.hero.name}
+        </h1>
+        <p className="mt-1 text-[13px] font-medium text-neutral-600">{data.hero.role}</p>
+        <ul className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11.5px] text-neutral-500">
+          {contactLinks.map((item) => (
+            <li key={item.label}>
+              {item.href ? (
+                <a
+                  href={item.href}
+                  {...(item.external ? { target: "_blank", rel: "noreferrer" } : {})}
+                  className="transition-colors hover:text-neutral-900 hover:underline"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <span>{item.label}</span>
+              )}
+            </li>
+          ))}
         </ul>
       </header>
 
       <Block title="Summary">
-        <p className="text-[13px] leading-relaxed text-neutral-700">{data.hero.bio}</p>
+        <p className="text-[12.5px] leading-[1.7] text-neutral-700">{data.hero.bio}</p>
       </Block>
 
       <Block title="Experience">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-          <h3 className="text-[15px] font-semibold">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h3 className="text-[14px] font-semibold text-neutral-900">
             {experience.company}
             <span className="font-normal text-neutral-600"> — {experience.role}</span>
           </h3>
-          <span className="text-xs text-neutral-500">{experience.period}</span>
+          <span className="ml-auto text-[11.5px] whitespace-nowrap text-neutral-500">
+            {experience.period}
+          </span>
         </div>
-        <div className="mt-3 space-y-4">
+
+        <div className="mt-4 space-y-5">
           {Object.entries(experience.projects).map(([name, project]) => (
             <div key={name} className="break-inside-avoid">
-              <div className="flex flex-wrap items-baseline gap-x-2">
-                <h4 className="text-[13px] font-semibold">{name}</h4>
-                <span className="text-[11px] text-neutral-500">{project.stack.join(" · ")}</span>
-              </div>
-              <ul className="mt-1.5 space-y-1">
+              <h4 className="text-[12.5px] font-semibold text-neutral-900">{name}</h4>
+              <p className="mt-0.5 text-[11px] text-neutral-500">{project.stack.join(" · ")}</p>
+              <ul className="mt-2 list-disc space-y-1.5 pl-4 marker:text-neutral-300">
                 {project.highlights.map((highlight) => (
-                  <li
-                    key={highlight}
-                    className="flex gap-1.5 text-[12.5px] leading-relaxed text-neutral-700"
-                  >
-                    <span aria-hidden="true" className="mt-[7px] size-1 shrink-0 bg-neutral-400" />
+                  <li key={highlight} className="text-[12.5px] leading-[1.65]">
                     {highlight}
                   </li>
                 ))}
@@ -80,50 +71,48 @@ export function ResumeDocument({ className = "" }: { className?: string }) {
       </Block>
 
       <Block title="Projects">
-        <div className="space-y-3">
+        <div className="space-y-4">
           {data.projects.map((project) => (
             <div key={project.id} className="break-inside-avoid">
-              <div className="flex flex-wrap items-baseline gap-x-2">
-                <h3 className="text-[13px] font-semibold">
-                  <a
-                    href={project.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-neutral-900 hover:underline"
-                  >
-                    {project.name}
-                  </a>
-                </h3>
-                <span className="text-[11px] text-neutral-500">{project.stack.join(" · ")}</span>
-              </div>
-              <p className="mt-1 text-[12.5px] leading-relaxed text-neutral-700">
-                {project.action}
-              </p>
+              <h3 className="text-[12.5px] font-semibold text-neutral-900">
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition-colors hover:underline"
+                >
+                  {project.name}
+                </a>
+              </h3>
+              <p className="mt-0.5 text-[11px] text-neutral-500">{project.stack.join(" · ")}</p>
+              <p className="mt-1.5 text-[12.5px] leading-[1.65]">{project.action}</p>
             </div>
           ))}
         </div>
       </Block>
 
       <Block title="Skills">
-        <dl className="space-y-1.5">
+        <dl className="grid grid-cols-[5.5rem_1fr] gap-x-4 gap-y-2 text-[12.5px] leading-[1.6]">
           {Object.entries(data.stack).map(([layer, skills]) => (
-            <div key={layer} className="flex gap-2 text-[12.5px] leading-relaxed">
-              <dt className="w-24 shrink-0 font-medium text-neutral-500">{layer}</dt>
-              <dd className="text-neutral-700">{Object.keys(skills).join(", ")}</dd>
+            <div key={layer} className="col-span-2 grid grid-cols-subgrid">
+              <dt className="font-medium text-neutral-500">{layer}</dt>
+              <dd>{Object.keys(skills).join(", ")}</dd>
             </div>
           ))}
         </dl>
       </Block>
 
       <Block title="Education">
-        <div className="space-y-2">
+        <div className="space-y-3.5">
           {data.education.map((entry) => (
             <div key={entry.school} className="break-inside-avoid">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                <h3 className="text-[13px] font-semibold">{entry.school}</h3>
-                <span className="text-xs text-neutral-500">{entry.period}</span>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h3 className="text-[12.5px] font-semibold text-neutral-900">{entry.school}</h3>
+                <span className="ml-auto text-[11.5px] whitespace-nowrap text-neutral-500">
+                  {entry.period}
+                </span>
               </div>
-              <p className="text-[12.5px] text-neutral-700">
+              <p className="mt-0.5 text-[12px] text-neutral-600">
                 {entry.degree} · {entry.score} · {entry.location}
               </p>
             </div>
@@ -132,23 +121,21 @@ export function ResumeDocument({ className = "" }: { className?: string }) {
       </Block>
 
       <Block title="Volunteer">
-        <div className="space-y-3">
+        <div className="space-y-4">
           {data.volunteer.map((entry) => (
             <div key={entry.organization} className="break-inside-avoid">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                <h3 className="text-[13px] font-semibold">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h3 className="text-[12.5px] font-semibold text-neutral-900">
                   {entry.organization}
                   <span className="font-normal text-neutral-600"> — {entry.role}</span>
                 </h3>
-                <span className="text-xs text-neutral-500">{entry.period}</span>
+                <span className="ml-auto text-[11.5px] whitespace-nowrap text-neutral-500">
+                  {entry.period}
+                </span>
               </div>
-              <ul className="mt-1.5 space-y-1">
+              <ul className="mt-2 list-disc space-y-1.5 pl-4 marker:text-neutral-300">
                 {entry.highlights.map((highlight) => (
-                  <li
-                    key={highlight}
-                    className="flex gap-1.5 text-[12.5px] leading-relaxed text-neutral-700"
-                  >
-                    <span aria-hidden="true" className="mt-[7px] size-1 shrink-0 bg-neutral-400" />
+                  <li key={highlight} className="text-[12.5px] leading-[1.65]">
                     {highlight}
                   </li>
                 ))}
@@ -163,11 +150,11 @@ export function ResumeDocument({ className = "" }: { className?: string }) {
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="mt-5">
-      <h2 className="border-b border-neutral-200 pb-1 text-[11px] font-semibold tracking-[0.14em] text-neutral-500 uppercase">
+    <section className="mt-7 first:mt-6">
+      <h2 className="mb-3 border-b border-neutral-200 pb-1.5 text-[10px] font-semibold tracking-[0.16em] text-neutral-400 uppercase">
         {title}
       </h2>
-      <div className="mt-2.5">{children}</div>
+      {children}
     </section>
   );
 }

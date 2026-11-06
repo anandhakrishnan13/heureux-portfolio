@@ -62,7 +62,7 @@ export function ResumePanel({ open, onClose }: ResumePanelProps) {
           <span className="font-meta text-meta text-neutral-500">Resume</span>
           {actions}
         </div>
-        <ResumeDocument className="px-6 pt-6 pb-12" />
+        <ResumeDocument className="px-7 pt-7 pb-14" />
       </aside>
 
       {isMobile && (
@@ -70,7 +70,11 @@ export function ResumePanel({ open, onClose }: ResumePanelProps) {
           <SheetContent
             side="left"
             aria-describedby={undefined}
-            className="w-[94vw] max-w-md gap-0 overflow-y-auto overscroll-contain border-neutral-300 bg-white p-0 text-neutral-900 [&>button]:hidden"
+            onOpenAutoFocus={(event) => {
+              event.preventDefault();
+              (event.currentTarget as HTMLElement | null)?.focus();
+            }}
+            className="w-[94vw] max-w-md gap-0 overflow-y-auto overscroll-contain border-neutral-300 bg-white p-0 text-neutral-900 outline-none [&>button]:hidden"
           >
             <SheetTitle className="sr-only">Resume</SheetTitle>
             <SheetDescription className="sr-only">Resume of the portfolio owner</SheetDescription>
@@ -78,7 +82,7 @@ export function ResumePanel({ open, onClose }: ResumePanelProps) {
               <span className="font-meta text-meta text-neutral-500">Resume</span>
               {actions}
             </div>
-            <ResumeDocument className="px-5 pt-5 pb-10" />
+            <ResumeDocument className="px-5 pt-6 pb-12" />
           </SheetContent>
         </Sheet>
       )}

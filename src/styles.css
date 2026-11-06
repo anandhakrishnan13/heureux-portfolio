@@ -21,6 +21,8 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -148,6 +150,8 @@
 
 @keyframes slide-in-right {
   from {
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
     opacity: 0;
     transform: translate3d(20px, 0, 0);
   }
@@ -227,5 +231,39 @@
     max-width: none !important;
     margin-inline: 0 !important;
     padding-inline: 14mm !important;
+    font-size: 9pt;
+    line-height: 1.4;
+  }
+
+  /* Tighter rhythm on paper so the document stays two pages. */
+  .resume-doc h1 {
+    font-size: 18pt;
+    line-height: 1.15;
+  }
+
+  .resume-doc section {
+    margin-top: 8pt;
+  }
+
+  .resume-doc section h2 {
+    margin-bottom: 4pt;
+  }
+
+  .resume-doc p,
+  .resume-doc li,
+  .resume-doc dd,
+  .resume-doc h3,
+  .resume-doc h4 {
+    font-size: 8.8pt;
+    line-height: 1.38;
+  }
+
+  .resume-doc ul,
+  .resume-doc dl {
+    margin-top: 2pt;
+  }
+
+  .resume-doc li + li {
+    margin-top: 0.8pt;
   }
 }

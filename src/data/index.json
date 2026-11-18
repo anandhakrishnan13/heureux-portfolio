@@ -24,7 +24,8 @@
       "sectionLabel": "Projects",
       "heading": "Projects",
       "highlight": "Projects",
-      "sourceLabel": "source"
+      "sourceLabel": "source",
+      "liveLabel": "live demo"
     },
     "experience": {
       "sectionLabel": "Experience",
@@ -116,7 +117,8 @@
       "name": "Speech-to-Text Workspace",
       "action": "A real-time transcription platform routing audio across three engines: Groq Whisper, Google Gemini, and a self-hosted Whisper microservice (Whistle) containerised with Docker. Live audio streams over WebSockets, merging partial results into final transcripts and converting Indic scripts into readable Latin text. Includes transcript search, CRUD, and range-request audio playback.",
       "stack": ["Next.js", "Fastify", "Bun", "FastAPI", "PostgreSQL", "Drizzle ORM", "WebSockets"],
-      "href": "https://github.com/anandhakrishnan13/stt"
+      "href": "https://github.com/anandhakrishnan13/stt",
+      "live": "https://speech-to-text-steel-eight.vercel.app/"
     },
     {
       "id": "003",
@@ -145,6 +147,7 @@
     "role": "Full Stack Developer",
     "location": "Andheri, Mumbai",
     "period": "August 2025 - Present",
+    "start": "2025-08-01",
     "projects": {
       "Production Plan": {
         "stack": ["Next.js", "Express.js", "MongoDB", "BullMQ"],

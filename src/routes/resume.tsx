@@ -2,13 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowLeft, Download } from "lucide-react";
 
 import { ResumeDocument } from "@/components/resume-document";
-import data from "@/data/index.json";
+import { RESUME_PDF_URL } from "@/lib/constants";
+import { hero, siteMeta } from "@/lib/content";
 
 export const Route = createFileRoute("/resume")({
   head: () => ({
     meta: [
-      { title: `${data.hero.name} — Resume` },
-      { name: "description", content: data.meta.description },
+      { title: `${hero.name} — Resume` },
+      { name: "description", content: siteMeta.description },
     ],
   }),
   component: ResumePage,
@@ -26,7 +27,7 @@ function ResumePage() {
           Back to portfolio
         </a>
         <a
-          href="/resume.pdf"
+          href={RESUME_PDF_URL}
           download
           className="inline-flex items-center gap-1.5 rounded-md border border-neutral-300 px-3 py-1.5 text-xs font-medium text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-900"
         >

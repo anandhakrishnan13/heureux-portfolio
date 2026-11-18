@@ -5,6 +5,7 @@ import { ResumeDocument } from "@/components/resume-document";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { RESUME_PDF_URL } from "@/lib/constants";
 
 type ResumePanelProps = {
   open: boolean;
@@ -30,7 +31,7 @@ export function ResumePanel({ open, onClose }: ResumePanelProps) {
   const actions = (
     <div className="flex items-center gap-2">
       <a
-        href="/resume.pdf"
+        href={RESUME_PDF_URL}
         download
         className="inline-flex items-center gap-1.5 rounded-md border border-neutral-300 px-3 py-1.5 text-xs font-medium text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-900"
       >

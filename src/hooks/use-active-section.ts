@@ -1,17 +1,5 @@
 import { useEffect, useState } from "react";
-
-/** Sections in document order. Shared by the page focus effect and the nav dock. */
-export const SECTION_IDS = [
-  "hero",
-  "stack",
-  "experience",
-  "projects",
-  "education",
-  "volunteer",
-  "contact",
-] as const;
-
-export type SectionId = (typeof SECTION_IDS)[number];
+import { SECTION_IDS, type SectionId } from "@/lib/sections";
 
 const PIVOT = 0.35;
 

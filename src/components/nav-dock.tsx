@@ -8,9 +8,11 @@ import {
   Heart,
   Send,
   Menu,
+  type LucideIcon,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { SECTION_IDS, type SectionId } from "@/lib/sections";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Sheet,
@@ -22,15 +24,18 @@ import {
 } from "@/components/ui/sheet";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-const items = [
-  { id: "hero", label: "Intro", icon: Terminal },
-  { id: "stack", label: "Stack", icon: Boxes },
-  { id: "experience", label: "Experience", icon: Briefcase },
-  { id: "projects", label: "Projects", icon: FolderGit2 },
-  { id: "education", label: "Education", icon: GraduationCap },
-  { id: "volunteer", label: "Volunteer", icon: Heart },
-  { id: "contact", label: "Contact", icon: Send },
-];
+const NAV_META: Record<SectionId, { label: string; icon: LucideIcon }> = {
+  hero: { label: "Intro", icon: Terminal },
+  stack: { label: "Stack", icon: Boxes },
+  experience: { label: "Experience", icon: Briefcase },
+  projects: { label: "Projects", icon: FolderGit2 },
+  education: { label: "Education", icon: GraduationCap },
+  volunteer: { label: "Volunteer", icon: Heart },
+  contact: { label: "Contact", icon: Send },
+};
+
+/** Only sections that are actually rendered get a nav entry. */
+const items = SECTION_IDS.map((id) => ({ id, ...NAV_META[id] }));
 
 export function NavDock({ active }: { active: string }) {
   const [open, setOpen] = useState(false);

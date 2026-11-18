@@ -1,13 +1,16 @@
-import data from "@/data/index.json";
+import {
+  contactLinks,
+  education,
+  experience,
+  hero,
+  projects,
+  stack,
+  volunteer,
+} from "@/lib/content";
 
-const contact = data.sections.contact;
-const experience = data.experience;
-
-const contactLinks = [
-  { label: contact.email, href: `mailto:${contact.email}` },
-  { label: contact.phoneLabel, href: contact.phoneHref },
-  { label: contact.linkedinLabel, href: contact.linkedinUrl, external: true },
-  { label: contact.githubLabel, href: contact.githubUrl, external: true },
+/** Resume header links: the shared contact channels plus the (non-clickable) location. */
+const headerLinks: Array<{ label: string; href: string | null; external?: boolean }> = [
+  ...contactLinks,
   { label: experience.location, href: null },
 ];
 
@@ -16,11 +19,11 @@ export function ResumeDocument({ className = "" }: { className?: string }) {
     <article className={`resume-doc text-[13px] leading-[1.65] text-neutral-700 ${className}`}>
       <header>
         <h1 className="text-[27px] leading-tight font-bold tracking-tight text-neutral-900">
-          {data.hero.name}
+          {hero.name}
         </h1>
-        <p className="mt-1 text-[13px] font-medium text-neutral-600">{data.hero.role}</p>
+        <p className="mt-1 text-[13px] font-medium text-neutral-600">{hero.role}</p>
         <ul className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11.5px] text-neutral-500">
-          {contactLinks.map((item) => (
+          {headerLinks.map((item) => (
             <li key={item.label}>
               {item.href ? (
                 <a
@@ -39,7 +42,7 @@ export function ResumeDocument({ className = "" }: { className?: string }) {
       </header>
 
       <Block title="Summary">
-        <p className="text-[12.5px] leading-[1.7] text-neutral-700">{data.hero.bio}</p>
+        <p className="text-[12.5px] leading-[1.7] text-neutral-700">{hero.bio}</p>
       </Block>
 
       <Block title="Experience">
@@ -72,7 +75,7 @@ export function ResumeDocument({ className = "" }: { className?: string }) {
 
       <Block title="Projects">
         <div className="space-y-4">
-          {data.projects.map((project) => (
+          {projects.map((project) => (
             <div key={project.id} className="break-inside-avoid">
               <h3 className="text-[12.5px] font-semibold text-neutral-900">
                 <a
@@ -93,7 +96,7 @@ export function ResumeDocument({ className = "" }: { className?: string }) {
 
       <Block title="Skills">
         <dl className="grid grid-cols-[5.5rem_1fr] gap-x-4 gap-y-2 text-[12.5px] leading-[1.6]">
-          {Object.entries(data.stack).map(([layer, skills]) => (
+          {Object.entries(stack).map(([layer, skills]) => (
             <div key={layer} className="col-span-2 grid grid-cols-subgrid">
               <dt className="font-medium text-neutral-500">{layer}</dt>
               <dd>{Object.keys(skills).join(", ")}</dd>
@@ -104,7 +107,7 @@ export function ResumeDocument({ className = "" }: { className?: string }) {
 
       <Block title="Education">
         <div className="space-y-3.5">
-          {data.education.map((entry) => (
+          {education.map((entry) => (
             <div key={entry.school} className="break-inside-avoid">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="text-[12.5px] font-semibold text-neutral-900">{entry.school}</h3>
@@ -122,7 +125,7 @@ export function ResumeDocument({ className = "" }: { className?: string }) {
 
       <Block title="Volunteer">
         <div className="space-y-4">
-          {data.volunteer.map((entry) => (
+          {volunteer.map((entry) => (
             <div key={entry.organization} className="break-inside-avoid">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="text-[12.5px] font-semibold text-neutral-900">
